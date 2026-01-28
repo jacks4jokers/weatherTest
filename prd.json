@@ -1,0 +1,282 @@
+[
+  {
+    "id": "001",
+    "category": "architecture",
+    "priority": 1,
+    "description": "Initialize Next.js project with TypeScript and Tailwind CSS",
+    "steps": [
+      "Run npx create-next-app@latest with TypeScript and Tailwind",
+      "Verify dev server starts with npm run dev",
+      "Verify TypeScript compiles with npm run build"
+    ],
+    "passes": true
+  },
+  {
+    "id": "002",
+    "category": "architecture",
+    "priority": 1,
+    "description": "Set up project structure with services, components, hooks, and types directories",
+    "steps": [
+      "Create /src/services directory for API clients",
+      "Create /src/components directory for React components",
+      "Create /src/hooks directory for custom hooks",
+      "Create /src/types directory for TypeScript types",
+      "Verify structure matches planned architecture"
+    ],
+    "passes": false
+  },
+  {
+    "id": "003",
+    "category": "architecture",
+    "priority": 1,
+    "description": "Define core TypeScript types for weather data model",
+    "steps": [
+      "Create /src/types/weather.ts with WeatherData interface",
+      "Include fields: temperature, feelsLike, precipitation, humidity, windSpeed, windDirection, visibility, uvIndex, weatherCode",
+      "Create TimelinePoint type with timestamp and weather data",
+      "Verify types compile without errors"
+    ],
+    "passes": false
+  },
+  {
+    "id": "004",
+    "category": "integration",
+    "priority": 2,
+    "description": "Implement Open-Meteo API client for forecast data",
+    "steps": [
+      "Create /src/services/openMeteo.ts",
+      "Implement fetchForecast(lat, lon) function",
+      "Return hourly data with past 8 hours and next 48 hours",
+      "Include minutely_15 precipitation data for next 2 hours",
+      "Verify API returns valid data for a US location (e.g., NYC: 40.7128, -74.0060)"
+    ],
+    "passes": false
+  },
+  {
+    "id": "005",
+    "category": "integration",
+    "priority": 2,
+    "description": "Implement NWS API client for alerts and backup data",
+    "steps": [
+      "Create /src/services/nwsApi.ts",
+      "Implement fetchAlerts(lat, lon) function",
+      "Implement fetchHourlyForecast(lat, lon) function",
+      "Handle NWS two-step API (points -> gridpoint forecast)",
+      "Verify alerts endpoint returns data for a US location"
+    ],
+    "passes": false
+  },
+  {
+    "id": "006",
+    "category": "integration",
+    "priority": 2,
+    "description": "Create unified weather API aggregation layer",
+    "steps": [
+      "Create /src/services/weatherApi.ts",
+      "Implement getWeatherTimeline(lat, lon) that combines Open-Meteo and NWS data",
+      "Return unified TimelinePoint[] array spanning past 8h to future 48h",
+      "Include 5-minute granularity for next 2 hours using minutely data",
+      "Implement fallback: if Open-Meteo fails, use NWS data"
+    ],
+    "passes": false
+  },
+  {
+    "id": "007",
+    "category": "functional",
+    "priority": 3,
+    "description": "Implement geolocation hook for user location",
+    "steps": [
+      "Create /src/hooks/useLocation.ts",
+      "Request browser geolocation permission",
+      "Return { latitude, longitude, error, loading } state",
+      "Handle permission denied gracefully with error message",
+      "Verify hook works on mobile browser"
+    ],
+    "passes": false
+  },
+  {
+    "id": "008",
+    "category": "functional",
+    "priority": 3,
+    "description": "Implement weather data fetching hook",
+    "steps": [
+      "Create /src/hooks/useWeatherData.ts",
+      "Accept latitude and longitude parameters",
+      "Fetch weather timeline using weatherApi service",
+      "Return { timeline, currentWeather, loading, error } state",
+      "Implement refetch function for manual refresh"
+    ],
+    "passes": false
+  },
+  {
+    "id": "009",
+    "category": "ui",
+    "priority": 3,
+    "description": "Build timeline slider component with past/future visualization",
+    "steps": [
+      "Create /src/components/TimelineSlider.tsx",
+      "Display horizontal slider spanning past 8h to future 48h",
+      "Mark current time distinctly on the slider",
+      "Show 5-minute tick marks for next 2 hours",
+      "Show hourly tick marks beyond 2 hours",
+      "Implement drag/touch interaction to scrub through time",
+      "Verify slider is touch-friendly on mobile (44px+ touch targets)"
+    ],
+    "passes": false
+  },
+  {
+    "id": "010",
+    "category": "ui",
+    "priority": 3,
+    "description": "Build weather card component showing current conditions",
+    "steps": [
+      "Create /src/components/WeatherCard.tsx",
+      "Display temperature (actual and feels like)",
+      "Display precipitation probability and type",
+      "Display wind speed and direction",
+      "Display humidity, visibility, UV index",
+      "Show weather condition icon",
+      "Update display when slider position changes"
+    ],
+    "passes": false
+  },
+  {
+    "id": "011",
+    "category": "ui",
+    "priority": 3,
+    "description": "Build location picker component for manual location entry",
+    "steps": [
+      "Create /src/components/LocationPicker.tsx",
+      "Allow ZIP code or city name input",
+      "Geocode input to lat/lon coordinates",
+      "Display current location name",
+      "Allow switching between GPS and manual location"
+    ],
+    "passes": false
+  },
+  {
+    "id": "012",
+    "category": "functional",
+    "priority": 4,
+    "description": "Implement hyper-local weather suggestions engine",
+    "steps": [
+      "Create /src/utils/weatherSuggestions.ts",
+      "Analyze next 2 hours of weather data",
+      "Generate contextual suggestions (e.g., 'Rain in 45 min - bring umbrella')",
+      "Include temperature change warnings",
+      "Include precipitation timing alerts",
+      "Include clear weather window suggestions"
+    ],
+    "passes": false
+  },
+  {
+    "id": "013",
+    "category": "ui",
+    "priority": 4,
+    "description": "Build suggestion banner component",
+    "steps": [
+      "Create /src/components/SuggestionBanner.tsx",
+      "Display top weather suggestion prominently",
+      "Allow dismissing/cycling through multiple suggestions",
+      "Style with appropriate weather-related colors/icons"
+    ],
+    "passes": false
+  },
+  {
+    "id": "014",
+    "category": "ui",
+    "priority": 4,
+    "description": "Assemble main page with all components",
+    "steps": [
+      "Update /src/app/page.tsx as main entry point",
+      "Integrate LocationPicker at top",
+      "Integrate SuggestionBanner below location",
+      "Integrate WeatherCard as main display",
+      "Integrate TimelineSlider at bottom",
+      "Wire up state so slider controls WeatherCard display"
+    ],
+    "passes": false
+  },
+  {
+    "id": "015",
+    "category": "ui",
+    "priority": 5,
+    "description": "Implement mobile-first responsive design",
+    "steps": [
+      "Ensure all components work at 320px width minimum",
+      "Test on iOS Safari and Android Chrome",
+      "Verify touch interactions work smoothly",
+      "Implement bottom sheet pattern for detailed info on mobile",
+      "Test at tablet (768px) and desktop (1024px+) breakpoints"
+    ],
+    "passes": false
+  },
+  {
+    "id": "016",
+    "category": "ui",
+    "priority": 5,
+    "description": "Add dark/light mode support",
+    "steps": [
+      "Detect system color scheme preference",
+      "Implement theme toggle in UI",
+      "Ensure all components respect theme",
+      "Verify contrast ratios meet accessibility standards"
+    ],
+    "passes": false
+  },
+  {
+    "id": "017",
+    "category": "validation",
+    "priority": 6,
+    "description": "Create historical accuracy validation script",
+    "steps": [
+      "Create /scripts/validateAccuracy.ts",
+      "Define list of 200+ US cities with coordinates",
+      "Fetch historical forecast vs actual data from Open-Meteo",
+      "Calculate temperature MAE (target: < 3°F)",
+      "Calculate precipitation timing accuracy (target: within 10 min)",
+      "Generate accuracy report by region"
+    ],
+    "passes": false
+  },
+  {
+    "id": "018",
+    "category": "validation",
+    "priority": 6,
+    "description": "Run validation and verify accuracy thresholds",
+    "steps": [
+      "Execute validation script against 200+ cities",
+      "Verify temperature MAE is under 3°F for 2-hour forecasts",
+      "Verify precipitation timing is within 10 minutes",
+      "Document any regions with lower accuracy",
+      "Generate final accuracy report"
+    ],
+    "passes": false
+  },
+  {
+    "id": "019",
+    "category": "functional",
+    "priority": 5,
+    "description": "Add error handling and loading states",
+    "steps": [
+      "Show loading skeleton while fetching weather data",
+      "Display user-friendly error messages on API failure",
+      "Implement retry mechanism for failed requests",
+      "Handle offline state gracefully"
+    ],
+    "passes": false
+  },
+  {
+    "id": "020",
+    "category": "polish",
+    "priority": 6,
+    "description": "Add weather condition animations and visual polish",
+    "steps": [
+      "Add subtle animations for weather icons",
+      "Implement precipitation intensity visualization on timeline",
+      "Add smooth transitions when scrubbing timeline",
+      "Ensure animations don't impact performance on mobile"
+    ],
+    "passes": false
+  }
+]

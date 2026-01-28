@@ -1,0 +1,38 @@
+# Weather App Progress Log
+# This file tracks Ralph's progress through the PRD
+# Delete this file when the sprint is complete
+
+## Session Start
+- Date: 2026-01-28
+- Starting PRD items remaining: 20
+
+---
+
+## Completed Tasks
+
+### PRD-001: Initialize Next.js project with TypeScript and Tailwind CSS
+- **Completed**: 2026-01-28
+- **Files changed**:
+  - package.json (created)
+  - tsconfig.json (created)
+  - next.config.ts (created)
+  - tailwind.config.ts (created via postcss.config.mjs)
+  - src/app/layout.tsx (created)
+  - src/app/page.tsx (created)
+  - src/app/globals.css (created)
+  - eslint.config.mjs (created)
+- **Decisions made**:
+  - Used Next.js 16 with App Router
+  - Used npm as package manager
+  - Enabled src directory structure
+  - Set import alias to @/*
+- **Notes for next iteration**:
+  - Project builds successfully
+  - Ready for PRD-002: directory structure setup
+
+---
+
+## Current State
+- Last completed: PRD-001
+- Next recommended: PRD-002 (Set up project structure)
+- Blockers: [none]
