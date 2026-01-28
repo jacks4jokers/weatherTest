@@ -45,9 +45,23 @@
   - Project builds and lints successfully
   - Ready for PRD-003: Define core TypeScript types for weather data model
 
+### PRD-003: Define core TypeScript types for weather data model
+- **Completed**: 2026-01-28
+- **Files changed**:
+  - src/types/weather.ts (created)
+- **Decisions made**:
+  - Used WMO weather interpretation codes for weatherCode type (standard from Open-Meteo API)
+  - WindDirection uses 16-point compass rose (N, NNE, NE, etc.)
+  - Temperature in Fahrenheit, wind speed in mph, visibility in miles (US-focused app)
+  - Created additional helper types: WindDirection, WeatherCode, TimelineGranularity, WeatherTimeline
+- **Notes for next iteration**:
+  - Types compile without errors
+  - Build and lint pass successfully
+  - Ready for PRD-004: Implement Open-Meteo API client
+
 ---
 
 ## Current State
-- Last completed: PRD-002
-- Next recommended: PRD-003 (Define core TypeScript types)
+- Last completed: PRD-003
+- Next recommended: PRD-004 (Implement Open-Meteo API client for forecast data)
 - Blockers: [none]
