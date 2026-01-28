@@ -59,9 +59,27 @@
   - Build and lint pass successfully
   - Ready for PRD-004: Implement Open-Meteo API client
 
+### PRD-004: Implement Open-Meteo API client for forecast data
+- **Completed**: 2026-01-28
+- **Files changed**:
+  - src/services/openMeteo.ts (created)
+  - src/services/.gitkeep (removed)
+- **Decisions made**:
+  - Uses Open-Meteo free API (no API key required)
+  - Requests data in metric units and converts to imperial (Fahrenheit, mph, miles) for precision
+  - Uses auto timezone detection based on coordinates
+  - past_hours=8 and forecast_hours=48 for hourly data coverage
+  - forecast_minutely_15=8 for 2 hours of 15-minute precipitation data
+  - Minutely points inherit full weather data from closest hourly point, with precipitation overridden
+  - Created helper functions: degreesToDirection, celsiusToFahrenheit, kmhToMph, metersToMiles
+  - ForecastResult type includes both hourlyPoints and minutelyPoints arrays
+- **Notes for next iteration**:
+  - Build and lint pass successfully
+  - Ready for PRD-005: Implement NWS API client for alerts and backup data
+
 ---
 
 ## Current State
-- Last completed: PRD-003
-- Next recommended: PRD-004 (Implement Open-Meteo API client for forecast data)
+- Last completed: PRD-004
+- Next recommended: PRD-005 (Implement NWS API client for alerts and backup data)
 - Blockers: [none]

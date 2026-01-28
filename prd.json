@@ -50,7 +50,7 @@
       "Include minutely_15 precipitation data for next 2 hours",
       "Verify API returns valid data for a US location (e.g., NYC: 40.7128, -74.0060)"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "005",
