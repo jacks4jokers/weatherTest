@@ -30,9 +30,24 @@
   - Project builds successfully
   - Ready for PRD-002: directory structure setup
 
+### PRD-002: Set up project structure with services, components, hooks, and types directories
+- **Completed**: 2026-01-28
+- **Files changed**:
+  - src/services/.gitkeep (created)
+  - src/components/.gitkeep (created)
+  - src/hooks/.gitkeep (created)
+  - src/types/.gitkeep (created)
+  - src/utils/.gitkeep (created - bonus directory for utility functions)
+- **Decisions made**:
+  - Used .gitkeep files to track empty directories in git
+  - Added utils directory in addition to required directories (needed for PRD-012)
+- **Notes for next iteration**:
+  - Project builds and lints successfully
+  - Ready for PRD-003: Define core TypeScript types for weather data model
+
 ---
 
 ## Current State
-- Last completed: PRD-001
-- Next recommended: PRD-002 (Set up project structure)
+- Last completed: PRD-002
+- Next recommended: PRD-003 (Define core TypeScript types)
 - Blockers: [none]
