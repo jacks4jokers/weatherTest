@@ -110,9 +110,27 @@
   - Build and lint pass successfully
   - Ready for PRD-007: Implement geolocation hook for user location
 
+### PRD-007: Implement geolocation hook for user location
+- **Completed**: 2026-01-29
+- **Files changed**:
+  - src/hooks/useLocation.ts (created)
+  - src/hooks/.gitkeep (removed)
+- **Decisions made**:
+  - Uses 'use client' directive since hook uses browser APIs (navigator.geolocation)
+  - Auto-requests location on hook mount for immediate availability
+  - Provides requestLocation() function for manual refresh
+  - EnableHighAccuracy: true for best precision on mobile
+  - Timeout: 10s for location request
+  - MaximumAge: 5 minutes cache to avoid excessive GPS requests
+  - Detailed error messages for PERMISSION_DENIED, POSITION_UNAVAILABLE, TIMEOUT cases
+  - Returns UseLocationReturn interface with { latitude, longitude, error, loading, requestLocation }
+- **Notes for next iteration**:
+  - Build and lint pass successfully
+  - Ready for PRD-008: Implement weather data fetching hook
+
 ---
 
 ## Current State
-- Last completed: PRD-006
-- Next recommended: PRD-007 (Implement geolocation hook for user location)
+- Last completed: PRD-007
+- Next recommended: PRD-008 (Implement weather data fetching hook)
 - Blockers: [none]

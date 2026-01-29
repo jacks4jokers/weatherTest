@@ -92,7 +92,7 @@
       "Handle permission denied gracefully with error message",
       "Verify hook works on mobile browser"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "008",
