@@ -106,7 +106,7 @@
       "Return { timeline, currentWeather, loading, error } state",
       "Implement refetch function for manual refresh"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "009",

@@ -128,9 +128,25 @@
   - Build and lint pass successfully
   - Ready for PRD-008: Implement weather data fetching hook
 
+### PRD-008: Implement weather data fetching hook
+- **Completed**: 2026-01-29
+- **Files changed**:
+  - src/hooks/useWeatherData.ts (created)
+- **Decisions made**:
+  - Uses 'use client' directive since hook uses browser-dependent state
+  - Accepts nullable latitude/longitude - skips fetching when either is null
+  - Returns comprehensive state: timeline, currentWeather, alerts, loading, error, source
+  - Uses async IIFE pattern in useEffect to satisfy react-hooks/set-state-in-effect lint rule
+  - Provides refetch() function for manual refresh capability
+  - Includes alerts and source from the weatherApi in the return state
+  - currentWeather is derived from timeline using getCurrentWeather() utility
+- **Notes for next iteration**:
+  - Build and lint pass successfully
+  - Ready for PRD-009: Build timeline slider component
+
 ---
 
 ## Current State
-- Last completed: PRD-007
-- Next recommended: PRD-008 (Implement weather data fetching hook)
+- Last completed: PRD-008
+- Next recommended: PRD-009 (Build timeline slider component with past/future visualization)
 - Blockers: [none]
