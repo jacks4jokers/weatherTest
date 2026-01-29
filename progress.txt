@@ -77,9 +77,27 @@
   - Build and lint pass successfully
   - Ready for PRD-005: Implement NWS API client for alerts and backup data
 
+### PRD-005: Implement NWS API client for alerts and backup data
+- **Completed**: 2026-01-28
+- **Files changed**:
+  - src/services/nwsApi.ts (created)
+- **Decisions made**:
+  - Uses NWS api.weather.gov endpoints (free, no API key required)
+  - Implements two-step API pattern: points endpoint -> gridpoint hourly forecast
+  - User-Agent header set as required by NWS API guidelines
+  - fetchAlerts(lat, lon) returns active alerts for a location
+  - fetchHourlyForecast(lat, lon) returns TimelinePoint[] array
+  - NWS wind speed strings (e.g., "5 to 10 mph") parsed to numeric mph values
+  - NWS short forecast text mapped to WMO weather codes for consistency with Open-Meteo
+  - Default values used for fields NWS doesn't provide: visibility=10mi, uvIndex=0, feelsLike=temperature
+  - Coordinates rounded to 4 decimal places as required by NWS API
+- **Notes for next iteration**:
+  - Build and lint pass successfully
+  - Ready for PRD-006: Create unified weather API aggregation layer
+
 ---
 
 ## Current State
-- Last completed: PRD-004
-- Next recommended: PRD-005 (Implement NWS API client for alerts and backup data)
+- Last completed: PRD-005
+- Next recommended: PRD-006 (Create unified weather API aggregation layer)
 - Blockers: [none]

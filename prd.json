@@ -64,7 +64,7 @@
       "Handle NWS two-step API (points -> gridpoint forecast)",
       "Verify alerts endpoint returns data for a US location"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "006",
