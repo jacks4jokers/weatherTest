@@ -7,14 +7,15 @@ if [ -z "$1" ]; then
 fi
 
 for ((i=1; i<=$1; i++)); do
-  result=$(docker sandbox run claude --permission-mode acceptEdits -p "@PRD.md @progress.txt \
-  1. Find the highest-priority task and implement it. \
+  result=$(docker sandbox run claude --permission-mode acceptEdits -p "@prd.json @progress.txt \
+  1. Find the highest-priority task (lowest priority number, passes=false) and implement it. \
   2. Run your tests and type checks. \
-  3. Update the PRD with what was done. \
-  4. Append your progress to progress.txt. \
-  5. Commit your changes. \
+  3. If the task has 'verification': 'playwright', start the dev server and use Playwright to verify the UI renders and functions correctly. \
+  4. Update prd.json: set passes=true for completed task. \
+  5. Append your progress to progress.txt. \
+  6. Commit your changes. \
   ONLY WORK ON A SINGLE TASK. \
-  If the PRD is complete, output <promise>COMPLETE</promise>.")
+  If all tasks have passes=true, output <promise>COMPLETE</promise>.")
 
   echo "$result"
 

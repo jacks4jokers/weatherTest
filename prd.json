@@ -122,7 +122,8 @@
       "Implement drag/touch interaction to scrub through time",
       "Verify slider is touch-friendly on mobile (44px+ touch targets)"
     ],
-    "passes": false
+    "passes": false,
+    "verification": "playwright"
   },
   {
     "id": "010",
@@ -138,7 +139,8 @@
       "Show weather condition icon",
       "Update display when slider position changes"
     ],
-    "passes": false
+    "passes": false,
+    "verification": "playwright"
   },
   {
     "id": "011",
@@ -152,7 +154,8 @@
       "Display current location name",
       "Allow switching between GPS and manual location"
     ],
-    "passes": false
+    "passes": false,
+    "verification": "playwright"
   },
   {
     "id": "012",
@@ -180,7 +183,8 @@
       "Allow dismissing/cycling through multiple suggestions",
       "Style with appropriate weather-related colors/icons"
     ],
-    "passes": false
+    "passes": false,
+    "verification": "playwright"
   },
   {
     "id": "014",
@@ -195,7 +199,8 @@
       "Integrate TimelineSlider at bottom",
       "Wire up state so slider controls WeatherCard display"
     ],
-    "passes": false
+    "passes": false,
+    "verification": "playwright"
   },
   {
     "id": "015",
@@ -209,7 +214,8 @@
       "Implement bottom sheet pattern for detailed info on mobile",
       "Test at tablet (768px) and desktop (1024px+) breakpoints"
     ],
-    "passes": false
+    "passes": false,
+    "verification": "playwright"
   },
   {
     "id": "016",
@@ -222,7 +228,8 @@
       "Ensure all components respect theme",
       "Verify contrast ratios meet accessibility standards"
     ],
-    "passes": false
+    "passes": false,
+    "verification": "playwright"
   },
   {
     "id": "017",
