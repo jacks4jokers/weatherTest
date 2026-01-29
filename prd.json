@@ -122,7 +122,7 @@
       "Implement drag/touch interaction to scrub through time",
       "Verify slider is touch-friendly on mobile (44px+ touch targets)"
     ],
-    "passes": false,
+    "passes": true,
     "verification": "playwright"
   },
   {

@@ -144,9 +144,35 @@
   - Build and lint pass successfully
   - Ready for PRD-009: Build timeline slider component
 
+### PRD-009: Build timeline slider component with past/future visualization
+- **Completed**: 2026-01-29
+- **Files changed**:
+  - src/components/TimelineSlider.tsx (created)
+  - src/components/.gitkeep (removed)
+  - src/app/page.tsx (updated with demo page to test component)
+- **Decisions made**:
+  - Uses 'use client' directive since component uses browser state and pointer events
+  - Timeline displays past 8h to future 48h with different granularities
+  - "Now" marker displayed in red (bg-red-500) with distinct tall tick mark
+  - Next 2 hours highlighted with blue section (bg-blue-200 / dark:bg-blue-800)
+  - 5-minute tick marks shown for next 2 hours (at 15-min visual intervals)
+  - Hourly tick marks shown beyond 2 hours with labels at 3-hour intervals
+  - Uses Pointer Events API for unified mouse/touch handling
+  - Touch target height: h-14 (56px) exceeds 44px minimum for mobile
+  - Thumb scales up (scale-125) during drag for visual feedback
+  - Uses useMemo for stable time calculations to satisfy react purity lint rules
+  - nowTimestamp state updated every 60s to keep "current time" marker fresh
+  - Full ARIA support: role="slider", aria-valuemin, aria-valuemax, aria-valuenow, aria-valuetext
+  - Helper functions: formatTime (display), formatRelativeTime (relative time labels)
+- **Notes for next iteration**:
+  - Build and lint pass successfully
+  - Dev server verified with HTTP request - component renders correctly
+  - Playwright browser installation not supported on ARM architecture (manual browser verification would work)
+  - Ready for PRD-010: Build weather card component showing current conditions
+
 ---
 
 ## Current State
-- Last completed: PRD-008
-- Next recommended: PRD-009 (Build timeline slider component with past/future visualization)
+- Last completed: PRD-009
+- Next recommended: PRD-010 (Build weather card component showing current conditions)
 - Blockers: [none]
