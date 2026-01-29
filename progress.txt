@@ -170,9 +170,33 @@
   - Playwright browser installation not supported on ARM architecture (manual browser verification would work)
   - Ready for PRD-010: Build weather card component showing current conditions
 
+### PRD-010: Build weather card component showing current conditions
+- **Completed**: 2026-01-29
+- **Files changed**:
+  - src/components/WeatherCard.tsx (created)
+  - src/app/page.tsx (updated to integrate WeatherCard with TimelineSlider)
+- **Decisions made**:
+  - Uses 'use client' directive since component uses props from parent state
+  - Displays all required weather data: temperature, feels like, precipitation, humidity, wind, visibility, UV index
+  - Weather codes mapped to emoji icons and human-readable descriptions using WMO standard codes
+  - Precipitation type inferred from weather code (rain, snow, drizzle, freezing rain, etc.)
+  - UV index displayed with color-coded severity levels (Low/Moderate/High/Very High/Extreme)
+  - UV index includes gradient bar visualization showing current level
+  - Grid layout with 2 columns for weather details, UV index spans full width
+  - Component receives weather data as prop and updates automatically when slider changes
+  - TimeLabel prop shows relative time (e.g., "in 30 min", "2h ago") alongside absolute time
+  - isCurrentTime prop changes header to "Current Weather" when near present time
+  - All sections have data-testid attributes for testing
+- **Notes for next iteration**:
+  - Build and lint pass successfully
+  - Dev server verified with HTTP request - all weather card elements render correctly
+  - WeatherCard updates in sync with TimelineSlider changes
+  - Playwright browser installation not supported on ARM architecture (verified via HTTP response)
+  - Ready for PRD-011: Build location picker component
+
 ---
 
 ## Current State
-- Last completed: PRD-009
-- Next recommended: PRD-010 (Build weather card component showing current conditions)
+- Last completed: PRD-010
+- Next recommended: PRD-011 (Build location picker component for manual location entry)
 - Blockers: [none]

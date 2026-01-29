@@ -139,7 +139,7 @@
       "Show weather condition icon",
       "Update display when slider position changes"
     ],
-    "passes": false,
+    "passes": true,
     "verification": "playwright"
   },
   {

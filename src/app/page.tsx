@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from 'react';
 import { TimelineSlider } from '@/components/TimelineSlider';
+import { WeatherCard } from '@/components/WeatherCard';
 import type { TimelinePoint, WeatherCode } from '@/types/weather';
 
 /**
@@ -58,46 +59,98 @@ function createMockPoint(timestamp: Date): TimelinePoint {
   };
 }
 
+/**
+ * Format timestamp as a user-friendly label
+ */
+function formatTimeLabel(timestamp: string): string {
+  const date = new Date(timestamp);
+  const now = new Date();
+  const diffMs = date.getTime() - now.getTime();
+  const diffMins = Math.round(diffMs / (1000 * 60));
+  const diffHours = Math.round(diffMs / (1000 * 60 * 60));
+
+  const timeStr = date.toLocaleTimeString('en-US', {
+    hour: 'numeric',
+    minute: '2-digit',
+    hour12: true,
+  });
+
+  if (Math.abs(diffMins) < 5) {
+    return 'Now';
+  }
+
+  if (Math.abs(diffMins) < 60) {
+    return diffMins > 0
+      ? `${timeStr} (in ${diffMins} min)`
+      : `${timeStr} (${Math.abs(diffMins)} min ago)`;
+  }
+
+  return diffHours > 0
+    ? `${timeStr} (in ${Math.abs(diffHours)}h)`
+    : `${timeStr} (${Math.abs(diffHours)}h ago)`;
+}
+
+/**
+ * Check if timestamp is close to current time
+ */
+function isCurrentTime(timestamp: string): boolean {
+  const diffMs = Math.abs(new Date(timestamp).getTime() - Date.now());
+  return diffMs < 5 * 60 * 1000; // Within 5 minutes
+}
+
+/**
+ * Find the timeline point closest to the given timestamp
+ */
+function findClosestPoint(timeline: TimelinePoint[], targetTime: number): TimelinePoint {
+  let closest = timeline[0];
+  let closestDiff = Infinity;
+
+  for (const point of timeline) {
+    const diff = Math.abs(new Date(point.timestamp).getTime() - targetTime);
+    if (diff < closestDiff) {
+      closestDiff = diff;
+      closest = point;
+    }
+  }
+
+  return closest;
+}
+
 export default function Home() {
   const timeline = useMemo(() => generateMockTimeline(), []);
+
+  // Initialize selected point to the closest to current time (uses lazy initializer)
   const [selectedPoint, setSelectedPoint] = useState<TimelinePoint | null>(
-    null
+    () => findClosestPoint(timeline, Date.now())
   );
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-zinc-50 p-4 dark:bg-zinc-900">
-      <main className="w-full max-w-2xl rounded-lg bg-white p-6 shadow-lg dark:bg-zinc-800">
-        <h1 className="mb-6 text-2xl font-bold text-zinc-900 dark:text-zinc-100">
-          Weather Timeline Demo
+      <main className="w-full max-w-md space-y-6">
+        <h1 className="text-center text-2xl font-bold text-zinc-900 dark:text-zinc-100">
+          Weather Timeline
         </h1>
 
-        {/* Selected time info */}
+        {/* Weather card - updates based on slider position */}
         {selectedPoint && (
-          <div className="mb-4 rounded-lg bg-blue-50 p-4 dark:bg-blue-900/30">
-            <p className="text-sm text-blue-800 dark:text-blue-200">
-              <strong>Temperature:</strong> {selectedPoint.weather.temperature}°F
-              (feels like {selectedPoint.weather.feelsLike}°F)
-            </p>
-            <p className="text-sm text-blue-800 dark:text-blue-200">
-              <strong>Precipitation:</strong> {selectedPoint.weather.precipitation}%
-            </p>
-            <p className="text-sm text-blue-800 dark:text-blue-200">
-              <strong>Wind:</strong> {selectedPoint.weather.windSpeed} mph{' '}
-              {selectedPoint.weather.windDirection}
-            </p>
-          </div>
+          <WeatherCard
+            weather={selectedPoint.weather}
+            timeLabel={formatTimeLabel(selectedPoint.timestamp)}
+            isCurrentTime={isCurrentTime(selectedPoint.timestamp)}
+          />
         )}
 
         {/* Timeline slider component */}
-        <TimelineSlider
-          timeline={timeline}
-          selectedPoint={selectedPoint}
-          onTimeChange={setSelectedPoint}
-        />
+        <div className="rounded-xl bg-white p-4 shadow-lg dark:bg-zinc-800">
+          <TimelineSlider
+            timeline={timeline}
+            selectedPoint={selectedPoint}
+            onTimeChange={setSelectedPoint}
+          />
+        </div>
 
-        <p className="mt-6 text-center text-sm text-zinc-500 dark:text-zinc-400">
-          Drag the slider to scrub through time. Touch-friendly with 44px+
-          targets.
+        <p className="text-center text-sm text-zinc-500 dark:text-zinc-400">
+          Drag the slider to see weather at different times
         </p>
       </main>
     </div>
