@@ -228,7 +228,7 @@
       "Ensure all components respect theme",
       "Verify contrast ratios meet accessibility standards"
     ],
-    "passes": false,
+    "passes": true,
     "verification": "playwright"
   },
   {

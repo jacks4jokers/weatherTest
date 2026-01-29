@@ -6,6 +6,7 @@ import { WeatherCard } from '@/components/WeatherCard';
 import { LocationPicker, type LocationData } from '@/components/LocationPicker';
 import { SuggestionBanner } from '@/components/SuggestionBanner';
 import { BottomSheet } from '@/components/BottomSheet';
+import { ThemeToggle } from '@/components/ThemeToggle';
 import { useLocation } from '@/hooks/useLocation';
 import { useWeatherData } from '@/hooks/useWeatherData';
 import type { TimelinePoint } from '@/types/weather';
@@ -158,9 +159,14 @@ export default function Home() {
     <div className="flex min-h-screen flex-col items-center justify-start bg-zinc-50 px-2 py-4 pt-6 sm:px-4 sm:pt-8 dark:bg-zinc-900">
       {/* Main container with responsive max-width */}
       <main className="w-full max-w-[320px] space-y-4 sm:max-w-md sm:space-y-6 md:max-w-lg lg:max-w-2xl">
-        <h1 className="text-center text-xl font-bold text-zinc-900 sm:text-2xl dark:text-zinc-100">
-          Weather Timeline
-        </h1>
+        {/* Header with title and theme toggle */}
+        <div className="flex items-center justify-between">
+          <div className="w-10" /> {/* Spacer for centering */}
+          <h1 className="text-center text-xl font-bold text-zinc-900 sm:text-2xl dark:text-zinc-100">
+            Weather Timeline
+          </h1>
+          <ThemeToggle />
+        </div>
 
         {/* Desktop: Two-column layout for wider screens */}
         <div className="lg:grid lg:grid-cols-2 lg:gap-6">

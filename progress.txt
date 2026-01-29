@@ -311,9 +311,34 @@
   - Dev server has lightningcss native module issue on ARM (unrelated to code changes)
   - Ready for PRD-016: Add dark/light mode support
 
+### PRD-016: Add dark/light mode support
+- **Completed**: 2026-01-29
+- **Files changed**:
+  - src/hooks/useTheme.ts (created - theme management hook)
+  - src/components/ThemeToggle.tsx (created - toggle button component)
+  - src/app/globals.css (updated with class-based dark mode support)
+  - src/app/layout.tsx (updated with theme script to prevent flash)
+  - src/app/page.tsx (updated to include ThemeToggle in header)
+- **Decisions made**:
+  - Supports three modes: light, dark, and system (follows OS preference)
+  - Theme preference persisted to localStorage with key 'weather-app-theme'
+  - Uses class-based dark mode (html element gets 'dark' class) for manual toggle
+  - System preference detection via prefers-color-scheme media query
+  - Inline script in layout.tsx prevents flash of incorrect theme on page load
+  - ThemeToggle offers simple toggle (light/dark) or options mode (light/dark/system)
+  - Toggle button shows sun icon for light mode, moon icon for dark mode
+  - Uses suppressHydrationWarning on html element to avoid React hydration mismatch
+  - All existing components already had dark: variant classes from previous PRDs
+  - Custom @custom-variant in CSS enables class-based dark mode in Tailwind v4
+- **Notes for next iteration**:
+  - TypeScript and ESLint pass successfully
+  - Playwright browser installation not supported on ARM architecture
+  - Dev server has lightningcss native module issue on ARM (unrelated to code changes)
+  - Ready for PRD-019: Add error handling and loading states (same priority level)
+
 ---
 
 ## Current State
-- Last completed: PRD-015
-- Next recommended: PRD-016 (Add dark/light mode support)
+- Last completed: PRD-016
+- Next recommended: PRD-019 (Add error handling and loading states) - same priority as PRD-016
 - Blockers: [none]
