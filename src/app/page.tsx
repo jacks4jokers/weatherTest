@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo, useEffect, useRef } from 'react';
 import { TimelineSlider } from '@/components/TimelineSlider';
 import { WeatherCard } from '@/components/WeatherCard';
 import { LocationPicker, type LocationData } from '@/components/LocationPicker';
@@ -132,18 +132,22 @@ export default function Home() {
 
   // Current location state (can be GPS or manually selected)
   const [currentLocation, setCurrentLocation] = useState<LocationData | null>(null);
+  const locationInitialized = useRef(false);
 
   // Initialize location from GPS when available
   useEffect(() => {
-    if (gpsLatitude != null && gpsLongitude != null && !currentLocation) {
-      // Set initial location with coordinates (reverse geocoding will update the name)
-      setCurrentLocation({
-        latitude: gpsLatitude,
-        longitude: gpsLongitude,
-        name: `${gpsLatitude.toFixed(4)}, ${gpsLongitude.toFixed(4)}`,
+    if (gpsLatitude != null && gpsLongitude != null && !locationInitialized.current) {
+      locationInitialized.current = true;
+      // Use queueMicrotask to avoid synchronous setState in effect
+      queueMicrotask(() => {
+        setCurrentLocation({
+          latitude: gpsLatitude,
+          longitude: gpsLongitude,
+          name: `${gpsLatitude.toFixed(4)}, ${gpsLongitude.toFixed(4)}`,
+        });
       });
     }
-  }, [gpsLatitude, gpsLongitude, currentLocation]);
+  }, [gpsLatitude, gpsLongitude]);
 
   // Initialize selected point to the closest to current time (uses lazy initializer)
   const [selectedPoint, setSelectedPoint] = useState<TimelinePoint | null>(

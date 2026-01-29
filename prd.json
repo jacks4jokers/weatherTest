@@ -170,7 +170,7 @@
       "Include precipitation timing alerts",
       "Include clear weather window suggestions"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "013",

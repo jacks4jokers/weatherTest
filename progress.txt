@@ -217,9 +217,35 @@
   - Playwright browser installation not supported on ARM architecture (verified via HTTP response)
   - Ready for PRD-012: Implement hyper-local weather suggestions engine
 
+### PRD-012: Implement hyper-local weather suggestions engine
+- **Completed**: 2026-01-29
+- **Files changed**:
+  - src/utils/weatherSuggestions.ts (created)
+  - src/utils/.gitkeep (removed)
+  - src/app/page.tsx (fixed lint issue - queueMicrotask pattern for setState in effect)
+  - src/components/LocationPicker.tsx (fixed lint warning - added aria-selected to role="option")
+- **Decisions made**:
+  - Suggestion types: precipitation, temperature, clear_window, uv, wind, visibility
+  - Priority levels: high, medium, low for sorting suggestions
+  - Precipitation detection uses WMO weather codes (51-57, 61-67, 71-77, 80-86, 95-99)
+  - Precipitation types detected: rain, drizzle, snow, freezing rain/drizzle, thunderstorms
+  - Intensity levels extracted from weather codes: light, moderate, heavy
+  - Temperature change warnings trigger at 10°F+ change within 2 hours
+  - Feels-like warnings trigger when differs by 10°F+ from actual temperature
+  - UV warnings at levels: 6+ (high), 8+ (very high), 11+ (extreme)
+  - Wind warnings at 25+ mph (gusty) and 40+ mph (strong)
+  - Visibility warnings at <1 mile and <0.25 mile
+  - Clear window suggestions show when precipitation-free but precipitation coming
+  - Helper functions: formatTimeUntil, isPrecipitationCode, getPrecipitationType, getPrecipitationIntensity
+  - Main exports: generateWeatherSuggestions() and getTopSuggestion()
+- **Notes for next iteration**:
+  - Build and lint pass successfully
+  - Fixed pre-existing lint issues in page.tsx and LocationPicker.tsx
+  - Ready for PRD-013: Build suggestion banner component
+
 ---
 
 ## Current State
-- Last completed: PRD-011
-- Next recommended: PRD-012 (Implement hyper-local weather suggestions engine)
+- Last completed: PRD-012
+- Next recommended: PRD-013 (Build suggestion banner component)
 - Blockers: [none]

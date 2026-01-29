@@ -317,6 +317,7 @@ export function LocationPicker({
                   onClick={() => handleSelectLocation(result)}
                   className="w-full px-4 py-3 text-left transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-600"
                   role="option"
+                  aria-selected={false}
                   data-testid={`search-result-${index}`}
                 >
                   <p className="font-medium text-zinc-900 dark:text-zinc-100">
