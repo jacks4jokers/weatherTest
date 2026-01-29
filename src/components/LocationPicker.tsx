@@ -240,20 +240,20 @@ export function LocationPicker({
   return (
     <div className="relative w-full" data-testid="location-picker">
       {/* Current location display */}
-      <div className="mb-3 flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <span className="text-lg" role="img" aria-label="location">
+      <div className="mb-3 flex items-center justify-between gap-2">
+        <div className="flex min-w-0 flex-1 items-center gap-2">
+          <span className="flex-shrink-0 text-base sm:text-lg" role="img" aria-label="location">
             {useGps ? '📍' : '🔍'}
           </span>
-          <div>
+          <div className="min-w-0 flex-1">
             <p
-              className="text-sm font-medium text-zinc-500 dark:text-zinc-400"
+              className="text-xs font-medium text-zinc-500 sm:text-sm dark:text-zinc-400"
               data-testid="location-source"
             >
               {useGps ? 'GPS Location' : 'Manual Location'}
             </p>
             <p
-              className="font-semibold text-zinc-900 dark:text-zinc-100"
+              className="truncate text-sm font-semibold text-zinc-900 sm:text-base dark:text-zinc-100"
               data-testid="location-name"
             >
               {gpsLoading
@@ -270,7 +270,7 @@ export function LocationPicker({
           <button
             type="button"
             onClick={handleUseGps}
-            className="rounded-lg bg-blue-100 px-3 py-1.5 text-sm font-medium text-blue-700 transition-colors hover:bg-blue-200 dark:bg-blue-900/50 dark:text-blue-300 dark:hover:bg-blue-900/70"
+            className="flex-shrink-0 rounded-lg bg-blue-100 px-2 py-1 text-xs font-medium text-blue-700 transition-colors hover:bg-blue-200 sm:px-3 sm:py-1.5 sm:text-sm dark:bg-blue-900/50 dark:text-blue-300 dark:hover:bg-blue-900/70"
             data-testid="use-gps-button"
           >
             Use GPS
@@ -278,17 +278,17 @@ export function LocationPicker({
         )}
       </div>
 
-      {/* Search input */}
+      {/* Search input - stack on very small screens */}
       <div className="relative">
-        <div className="flex gap-2">
+        <div className="flex flex-col gap-2 sm:flex-row">
           <input
             type="text"
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
             onKeyDown={handleKeyDown}
             onFocus={() => searchResults.length > 0 && setShowResults(true)}
-            placeholder="Enter ZIP code or city name..."
-            className="flex-1 rounded-lg border border-zinc-300 bg-white px-4 py-2.5 text-zinc-900 placeholder-zinc-500 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 dark:border-zinc-600 dark:bg-zinc-700 dark:text-zinc-100 dark:placeholder-zinc-400"
+            placeholder="ZIP code or city..."
+            className="w-full flex-1 rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-900 placeholder-zinc-500 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 sm:px-4 sm:py-2.5 sm:text-base dark:border-zinc-600 dark:bg-zinc-700 dark:text-zinc-100 dark:placeholder-zinc-400"
             aria-label="Search for location"
             data-testid="location-input"
           />
@@ -296,7 +296,7 @@ export function LocationPicker({
             type="button"
             onClick={handleSearch}
             disabled={isSearching || !inputValue.trim()}
-            className="rounded-lg bg-blue-600 px-4 py-2.5 font-medium text-white transition-colors hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-blue-500 dark:hover:bg-blue-600"
+            className="w-full rounded-lg bg-blue-600 px-3 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto sm:px-4 sm:py-2.5 sm:text-base dark:bg-blue-500 dark:hover:bg-blue-600"
             data-testid="search-button"
           >
             {isSearching ? 'Searching...' : 'Search'}

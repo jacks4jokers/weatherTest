@@ -101,9 +101,9 @@ export function SuggestionBanner({ timeline, currentTime }: SuggestionBannerProp
     return (
       <div
         data-testid="suggestion-banner-empty"
-        className="rounded-xl border border-zinc-200 bg-zinc-100 p-4 dark:border-zinc-700 dark:bg-zinc-800"
+        className="rounded-xl border border-zinc-200 bg-zinc-100 p-3 sm:p-4 dark:border-zinc-700 dark:bg-zinc-800"
       >
-        <p className="text-center text-sm text-zinc-500 dark:text-zinc-400">
+        <p className="text-center text-xs text-zinc-500 sm:text-sm dark:text-zinc-400">
           No weather alerts right now
         </p>
       </div>
@@ -116,36 +116,36 @@ export function SuggestionBanner({ timeline, currentTime }: SuggestionBannerProp
   return (
     <div
       data-testid="suggestion-banner"
-      className={`rounded-xl border p-4 ${bgColor}`}
+      className={`rounded-xl border p-3 sm:p-4 ${bgColor}`}
       role="alert"
       aria-live="polite"
     >
-      <div className="flex items-start gap-3">
+      <div className="flex items-start gap-2 sm:gap-3">
         {/* Icon */}
         <span
           data-testid="suggestion-icon"
-          className="flex-shrink-0 text-2xl"
+          className="flex-shrink-0 text-xl sm:text-2xl"
           aria-hidden="true"
         >
           {currentSuggestion.icon}
         </span>
 
         {/* Message content */}
-        <div className="flex-grow min-w-0">
+        <div className="min-w-0 flex-grow">
           <p
             data-testid="suggestion-message"
-            className={`font-medium ${textColor}`}
+            className={`text-sm font-medium sm:text-base ${textColor}`}
           >
             {currentSuggestion.message}
           </p>
 
           {/* Navigation and dismiss controls */}
-          <div className="mt-2 flex items-center gap-2">
+          <div className="mt-2 flex flex-wrap items-center gap-1 sm:gap-2">
             {/* Pagination indicator */}
             {activeSuggestions.length > 1 && (
               <span
                 data-testid="suggestion-counter"
-                className={`text-xs ${textColor} opacity-70`}
+                className={`text-[10px] sm:text-xs ${textColor} opacity-70`}
               >
                 {safeIndex + 1} of {activeSuggestions.length}
               </span>
@@ -155,11 +155,11 @@ export function SuggestionBanner({ timeline, currentTime }: SuggestionBannerProp
 
             {/* Navigation buttons */}
             {activeSuggestions.length > 1 && (
-              <div className="flex gap-1">
+              <div className="flex gap-0.5 sm:gap-1">
                 <button
                   data-testid="suggestion-prev"
                   onClick={handlePrevious}
-                  className={`rounded px-2 py-1 text-xs ${textColor} hover:bg-black/10 dark:hover:bg-white/10`}
+                  className={`rounded p-1.5 text-xs sm:px-2 sm:py-1 ${textColor} hover:bg-black/10 dark:hover:bg-white/10`}
                   aria-label="Previous suggestion"
                 >
                   ←
@@ -167,7 +167,7 @@ export function SuggestionBanner({ timeline, currentTime }: SuggestionBannerProp
                 <button
                   data-testid="suggestion-next"
                   onClick={handleNext}
-                  className={`rounded px-2 py-1 text-xs ${textColor} hover:bg-black/10 dark:hover:bg-white/10`}
+                  className={`rounded p-1.5 text-xs sm:px-2 sm:py-1 ${textColor} hover:bg-black/10 dark:hover:bg-white/10`}
                   aria-label="Next suggestion"
                 >
                   →
@@ -179,7 +179,7 @@ export function SuggestionBanner({ timeline, currentTime }: SuggestionBannerProp
             <button
               data-testid="suggestion-dismiss"
               onClick={handleDismiss}
-              className={`rounded px-2 py-1 text-xs ${textColor} hover:bg-black/10 dark:hover:bg-white/10`}
+              className={`rounded p-1.5 text-[10px] sm:px-2 sm:py-1 sm:text-xs ${textColor} hover:bg-black/10 dark:hover:bg-white/10`}
               aria-label="Dismiss suggestion"
             >
               Dismiss

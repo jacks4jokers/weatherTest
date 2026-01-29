@@ -284,9 +284,36 @@
   - Playwright browser installation not supported on ARM architecture (verified via HTTP response)
   - Ready for PRD-015: Implement mobile-first responsive design
 
+### PRD-015: Implement mobile-first responsive design
+- **Completed**: 2026-01-29
+- **Files changed**:
+  - src/app/page.tsx (updated with responsive breakpoints and bottom sheet integration)
+  - src/components/BottomSheet.tsx (created - mobile bottom sheet pattern)
+  - src/components/WeatherCard.tsx (updated with compact mode and responsive sizing)
+  - src/components/LocationPicker.tsx (updated with responsive input layout)
+  - src/components/TimelineSlider.tsx (updated with responsive spacing)
+  - src/components/SuggestionBanner.tsx (updated with responsive text and padding)
+- **Decisions made**:
+  - 320px minimum width supported using max-w-[320px] on smallest breakpoint
+  - Responsive breakpoints: sm (640px), md (768px), lg (1024px)
+  - Bottom sheet pattern for mobile weather details (< 1024px)
+  - Two-column layout for desktop (lg+) with weather card on left, timeline on right
+  - Desktop shows both compact and full weather card; mobile shows compact with tap-to-expand
+  - WeatherCard has compact prop for simplified mobile view
+  - LocationPicker search input stacks vertically on very small screens
+  - All text sizes scale with breakpoints (text-xs on mobile, text-sm/base on larger)
+  - Touch interactions preserved using Pointer Events API
+  - Bottom sheet supports swipe-to-dismiss gesture
+  - Full ARIA support maintained for accessibility
+- **Notes for next iteration**:
+  - TypeScript and ESLint pass successfully
+  - Playwright browser installation not supported on ARM architecture
+  - Dev server has lightningcss native module issue on ARM (unrelated to code changes)
+  - Ready for PRD-016: Add dark/light mode support
+
 ---
 
 ## Current State
-- Last completed: PRD-014
-- Next recommended: PRD-015 (Implement mobile-first responsive design)
+- Last completed: PRD-015
+- Next recommended: PRD-016 (Add dark/light mode support)
 - Blockers: [none]

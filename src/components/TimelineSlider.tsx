@@ -237,15 +237,15 @@ export function TimelineSlider({
   return (
     <div
       ref={containerRef}
-      className="w-full px-4 py-6 select-none touch-none"
+      className="w-full px-2 py-4 select-none touch-none sm:px-4 sm:py-6"
       data-testid="timeline-slider"
     >
       {/* Selected time display */}
-      <div className="mb-4 text-center">
-        <div className="text-lg font-semibold text-zinc-900 dark:text-zinc-100">
+      <div className="mb-3 text-center sm:mb-4">
+        <div className="text-base font-semibold text-zinc-900 sm:text-lg dark:text-zinc-100">
           {selectedPoint ? formatTime(selectedPoint.timestamp) : '—'}
         </div>
-        <div className="text-sm text-zinc-500 dark:text-zinc-400">
+        <div className="text-xs text-zinc-500 sm:text-sm dark:text-zinc-400">
           {selectedPoint ? formatRelativeTime(selectedPoint.timestamp) : '—'}
         </div>
       </div>
@@ -340,7 +340,7 @@ export function TimelineSlider({
       </div>
 
       {/* Timeline range labels */}
-      <div className="flex justify-between mt-6 text-xs text-zinc-400">
+      <div className="mt-4 flex justify-between text-[10px] text-zinc-400 sm:mt-6 sm:text-xs">
         <span>8h ago</span>
         <span>Now</span>
         <span>+48h</span>

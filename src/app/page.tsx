@@ -1,10 +1,11 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { TimelineSlider } from '@/components/TimelineSlider';
 import { WeatherCard } from '@/components/WeatherCard';
 import { LocationPicker, type LocationData } from '@/components/LocationPicker';
 import { SuggestionBanner } from '@/components/SuggestionBanner';
+import { BottomSheet } from '@/components/BottomSheet';
 import { useLocation } from '@/hooks/useLocation';
 import { useWeatherData } from '@/hooks/useWeatherData';
 import type { TimelinePoint } from '@/types/weather';
@@ -110,115 +111,190 @@ export default function Home() {
   const [selectedPoint, setSelectedPoint] = useState<TimelinePoint | null>(null);
   const timelineInitialized = useRef(false);
 
-  // Get timeline points array (for convenience)
-  const timelinePoints = timeline?.points ?? [];
+  // Bottom sheet state for mobile weather details
+  const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
 
-  // Initialize selected point when timeline first loads
+  // Open bottom sheet when tapping weather card on mobile
+  const handleWeatherCardClick = useCallback(() => {
+    // Only open on mobile/tablet (below lg breakpoint)
+    if (window.innerWidth < 1024) {
+      setIsBottomSheetOpen(true);
+    }
+  }, []);
+
+  // Get timeline points array (for convenience) - memoized to prevent effect re-runs
+  const timelinePoints = useMemo(() => timeline?.points ?? [], [timeline?.points]);
+
+  // Track location key to detect changes
+  const locationKey = useMemo(
+    () => `${currentLocation?.latitude}-${currentLocation?.longitude}`,
+    [currentLocation?.latitude, currentLocation?.longitude]
+  );
+  const prevLocationKey = useRef(locationKey);
+
+  // Initialize selected point when timeline first loads or location changes
   useEffect(() => {
+    // Check if location changed
+    const locationChanged = prevLocationKey.current !== locationKey;
+    if (locationChanged) {
+      prevLocationKey.current = locationKey;
+      timelineInitialized.current = false;
+    }
+
     if (timelinePoints.length > 0 && !timelineInitialized.current) {
       timelineInitialized.current = true;
       queueMicrotask(() => {
         setSelectedPoint(findClosestPoint(timelinePoints, Date.now()));
       });
+    } else if (timelinePoints.length === 0 && locationChanged) {
+      // Clear selected point when location changes and no data yet
+      queueMicrotask(() => {
+        setSelectedPoint(null);
+      });
     }
-  }, [timelinePoints]);
-
-  // Reset timeline initialization when location changes
-  useEffect(() => {
-    timelineInitialized.current = false;
-    setSelectedPoint(null);
-  }, [currentLocation?.latitude, currentLocation?.longitude]);
+  }, [timelinePoints, locationKey]);
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-start bg-zinc-50 p-4 pt-8 dark:bg-zinc-900">
-      <main className="w-full max-w-md space-y-6">
-        <h1 className="text-center text-2xl font-bold text-zinc-900 dark:text-zinc-100">
+    <div className="flex min-h-screen flex-col items-center justify-start bg-zinc-50 px-2 py-4 pt-6 sm:px-4 sm:pt-8 dark:bg-zinc-900">
+      {/* Main container with responsive max-width */}
+      <main className="w-full max-w-[320px] space-y-4 sm:max-w-md sm:space-y-6 md:max-w-lg lg:max-w-2xl">
+        <h1 className="text-center text-xl font-bold text-zinc-900 sm:text-2xl dark:text-zinc-100">
           Weather Timeline
         </h1>
 
-        {/* Location picker at top */}
-        <div className="rounded-xl bg-white p-4 shadow-lg dark:bg-zinc-800">
-          <LocationPicker
-            gpsLocation={{ latitude: gpsLatitude, longitude: gpsLongitude }}
-            gpsLoading={gpsLoading}
-            gpsError={gpsError}
-            currentLocation={currentLocation}
-            onLocationChange={setCurrentLocation}
-            onRequestGps={requestLocation}
-          />
-        </div>
-
-        {/* Suggestion banner below location */}
-        {timelinePoints.length > 0 && (
-          <SuggestionBanner timeline={timelinePoints} />
-        )}
-
-        {/* Loading state */}
-        {weatherLoading && (
-          <div className="rounded-xl bg-white p-8 shadow-lg dark:bg-zinc-800">
-            <div className="flex flex-col items-center justify-center space-y-4">
-              <div className="h-8 w-8 animate-spin rounded-full border-4 border-blue-500 border-t-transparent" />
-              <p className="text-zinc-600 dark:text-zinc-400">Loading weather data...</p>
+        {/* Desktop: Two-column layout for wider screens */}
+        <div className="lg:grid lg:grid-cols-2 lg:gap-6">
+          {/* Left column on desktop: Location + Weather Card */}
+          <div className="space-y-4 sm:space-y-6">
+            {/* Location picker at top */}
+            <div className="rounded-xl bg-white p-3 shadow-lg sm:p-4 dark:bg-zinc-800">
+              <LocationPicker
+                gpsLocation={{ latitude: gpsLatitude, longitude: gpsLongitude }}
+                gpsLoading={gpsLoading}
+                gpsError={gpsError}
+                currentLocation={currentLocation}
+                onLocationChange={setCurrentLocation}
+                onRequestGps={requestLocation}
+              />
             </div>
-          </div>
-        )}
 
-        {/* Error state */}
-        {weatherError && !weatherLoading && (
-          <div className="rounded-xl bg-red-50 p-6 shadow-lg dark:bg-red-900/20">
-            <div className="flex flex-col items-center space-y-3">
-              <span className="text-3xl">⚠️</span>
-              <p className="text-center text-red-700 dark:text-red-400">{weatherError}</p>
-              <button
-                onClick={refetch}
-                className="rounded-lg bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-700"
-                data-testid="retry-button"
+            {/* Suggestion banner below location */}
+            {timelinePoints.length > 0 && (
+              <SuggestionBanner timeline={timelinePoints} />
+            )}
+
+            {/* Loading state */}
+            {weatherLoading && (
+              <div className="rounded-xl bg-white p-6 shadow-lg sm:p-8 dark:bg-zinc-800">
+                <div className="flex flex-col items-center justify-center space-y-4">
+                  <div className="h-8 w-8 animate-spin rounded-full border-4 border-blue-500 border-t-transparent" />
+                  <p className="text-sm text-zinc-600 sm:text-base dark:text-zinc-400">Loading weather data...</p>
+                </div>
+              </div>
+            )}
+
+            {/* Error state */}
+            {weatherError && !weatherLoading && (
+              <div className="rounded-xl bg-red-50 p-4 shadow-lg sm:p-6 dark:bg-red-900/20">
+                <div className="flex flex-col items-center space-y-3">
+                  <span className="text-2xl sm:text-3xl">⚠️</span>
+                  <p className="text-center text-sm text-red-700 sm:text-base dark:text-red-400">{weatherError}</p>
+                  <button
+                    onClick={refetch}
+                    className="rounded-lg bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-700"
+                    data-testid="retry-button"
+                  >
+                    Try Again
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {/* No location state */}
+            {!currentLocation && !gpsLoading && !weatherLoading && (
+              <div className="rounded-xl bg-white p-6 shadow-lg sm:p-8 dark:bg-zinc-800">
+                <div className="flex flex-col items-center justify-center space-y-4">
+                  <span className="text-3xl sm:text-4xl">📍</span>
+                  <p className="text-center text-sm text-zinc-600 sm:text-base dark:text-zinc-400">
+                    Enable location access or search for a location to see weather data.
+                  </p>
+                </div>
+              </div>
+            )}
+
+            {/* Weather card - main display, updates based on slider position */}
+            {/* On mobile: tappable to show bottom sheet with full details */}
+            {selectedPoint && !weatherLoading && !weatherError && (
+              <div
+                onClick={handleWeatherCardClick}
+                className="cursor-pointer lg:cursor-default"
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => e.key === 'Enter' && handleWeatherCardClick()}
+                aria-label="Tap for more weather details"
               >
-                Try Again
-              </button>
-            </div>
+                <WeatherCard
+                  weather={selectedPoint.weather}
+                  timeLabel={formatTimeLabel(selectedPoint.timestamp)}
+                  isCurrentTime={isCurrentTime(selectedPoint.timestamp)}
+                  compact={true}
+                />
+                {/* "Tap for details" hint on mobile */}
+                <p className="mt-2 text-center text-xs text-zinc-400 lg:hidden">
+                  Tap for more details
+                </p>
+              </div>
+            )}
           </div>
-        )}
 
-        {/* No location state */}
-        {!currentLocation && !gpsLoading && !weatherLoading && (
-          <div className="rounded-xl bg-white p-8 shadow-lg dark:bg-zinc-800">
-            <div className="flex flex-col items-center justify-center space-y-4">
-              <span className="text-4xl">📍</span>
-              <p className="text-center text-zinc-600 dark:text-zinc-400">
-                Enable location access or search for a location to see weather data.
+          {/* Right column on desktop: Timeline + details */}
+          <div className="mt-4 space-y-4 sm:mt-6 sm:space-y-6 lg:mt-0">
+            {/* Timeline slider */}
+            {timelinePoints.length > 0 && !weatherLoading && !weatherError && (
+              <div className="rounded-xl bg-white p-3 shadow-lg sm:p-4 dark:bg-zinc-800">
+                <TimelineSlider
+                  timeline={timelinePoints}
+                  selectedPoint={selectedPoint}
+                  onTimeChange={setSelectedPoint}
+                />
+              </div>
+            )}
+
+            {/* Helper text */}
+            {timelinePoints.length > 0 && !weatherLoading && !weatherError && (
+              <p className="text-center text-xs text-zinc-500 sm:text-sm dark:text-zinc-400">
+                Drag the slider to see weather at different times
               </p>
-            </div>
-          </div>
-        )}
+            )}
 
-        {/* Weather card - main display, updates based on slider position */}
-        {selectedPoint && !weatherLoading && !weatherError && (
+            {/* Full weather details on desktop (hidden on mobile) */}
+            {selectedPoint && !weatherLoading && !weatherError && (
+              <div className="hidden lg:block">
+                <WeatherCard
+                  weather={selectedPoint.weather}
+                  timeLabel={formatTimeLabel(selectedPoint.timestamp)}
+                  isCurrentTime={isCurrentTime(selectedPoint.timestamp)}
+                />
+              </div>
+            )}
+          </div>
+        </div>
+      </main>
+
+      {/* Bottom sheet for mobile weather details */}
+      {selectedPoint && (
+        <BottomSheet
+          isOpen={isBottomSheetOpen}
+          onClose={() => setIsBottomSheetOpen(false)}
+          title="Weather Details"
+        >
           <WeatherCard
             weather={selectedPoint.weather}
             timeLabel={formatTimeLabel(selectedPoint.timestamp)}
             isCurrentTime={isCurrentTime(selectedPoint.timestamp)}
           />
-        )}
-
-        {/* Timeline slider at bottom */}
-        {timelinePoints.length > 0 && !weatherLoading && !weatherError && (
-          <div className="rounded-xl bg-white p-4 shadow-lg dark:bg-zinc-800">
-            <TimelineSlider
-              timeline={timelinePoints}
-              selectedPoint={selectedPoint}
-              onTimeChange={setSelectedPoint}
-            />
-          </div>
-        )}
-
-        {/* Helper text */}
-        {timelinePoints.length > 0 && !weatherLoading && !weatherError && (
-          <p className="text-center text-sm text-zinc-500 dark:text-zinc-400">
-            Drag the slider to see weather at different times
-          </p>
-        )}
-      </main>
+        </BottomSheet>
+      )}
     </div>
   );
 }

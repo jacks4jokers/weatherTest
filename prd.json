@@ -214,7 +214,7 @@
       "Implement bottom sheet pattern for detailed info on mobile",
       "Test at tablet (768px) and desktop (1024px+) breakpoints"
     ],
-    "passes": false,
+    "passes": true,
     "verification": "playwright"
   },
   {
