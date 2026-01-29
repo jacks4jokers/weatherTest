@@ -154,7 +154,7 @@
       "Display current location name",
       "Allow switching between GPS and manual location"
     ],
-    "passes": false,
+    "passes": true,
     "verification": "playwright"
   },
   {

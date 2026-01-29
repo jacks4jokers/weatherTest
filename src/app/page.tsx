@@ -1,8 +1,10 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { TimelineSlider } from '@/components/TimelineSlider';
 import { WeatherCard } from '@/components/WeatherCard';
+import { LocationPicker, type LocationData } from '@/components/LocationPicker';
+import { useLocation } from '@/hooks/useLocation';
 import type { TimelinePoint, WeatherCode } from '@/types/weather';
 
 /**
@@ -119,6 +121,30 @@ function findClosestPoint(timeline: TimelinePoint[], targetTime: number): Timeli
 export default function Home() {
   const timeline = useMemo(() => generateMockTimeline(), []);
 
+  // GPS location hook
+  const {
+    latitude: gpsLatitude,
+    longitude: gpsLongitude,
+    error: gpsError,
+    loading: gpsLoading,
+    requestLocation,
+  } = useLocation();
+
+  // Current location state (can be GPS or manually selected)
+  const [currentLocation, setCurrentLocation] = useState<LocationData | null>(null);
+
+  // Initialize location from GPS when available
+  useEffect(() => {
+    if (gpsLatitude != null && gpsLongitude != null && !currentLocation) {
+      // Set initial location with coordinates (reverse geocoding will update the name)
+      setCurrentLocation({
+        latitude: gpsLatitude,
+        longitude: gpsLongitude,
+        name: `${gpsLatitude.toFixed(4)}, ${gpsLongitude.toFixed(4)}`,
+      });
+    }
+  }, [gpsLatitude, gpsLongitude, currentLocation]);
+
   // Initialize selected point to the closest to current time (uses lazy initializer)
   const [selectedPoint, setSelectedPoint] = useState<TimelinePoint | null>(
     () => findClosestPoint(timeline, Date.now())
@@ -130,6 +156,18 @@ export default function Home() {
         <h1 className="text-center text-2xl font-bold text-zinc-900 dark:text-zinc-100">
           Weather Timeline
         </h1>
+
+        {/* Location picker component */}
+        <div className="rounded-xl bg-white p-4 shadow-lg dark:bg-zinc-800">
+          <LocationPicker
+            gpsLocation={{ latitude: gpsLatitude, longitude: gpsLongitude }}
+            gpsLoading={gpsLoading}
+            gpsError={gpsError}
+            currentLocation={currentLocation}
+            onLocationChange={setCurrentLocation}
+            onRequestGps={requestLocation}
+          />
+        </div>
 
         {/* Weather card - updates based on slider position */}
         {selectedPoint && (

@@ -194,9 +194,32 @@
   - Playwright browser installation not supported on ARM architecture (verified via HTTP response)
   - Ready for PRD-011: Build location picker component
 
+### PRD-011: Build location picker component for manual location entry
+- **Completed**: 2026-01-29
+- **Files changed**:
+  - src/components/LocationPicker.tsx (created)
+  - src/app/page.tsx (updated to integrate LocationPicker)
+- **Decisions made**:
+  - Uses 'use client' directive since component uses browser state and async API calls
+  - Uses Open-Meteo's free geocoding API (no API key required)
+  - Detects US ZIP codes (5-digit pattern) and filters results to US locations
+  - Shows search results in dropdown list with city, state/province, and country
+  - Displays current location with icon indicating GPS (📍) or Manual (🔍) mode
+  - Provides "Use GPS" button to switch back from manual to GPS location
+  - Reverse geocoding attempted to get human-readable name for GPS coordinates
+  - All interactive elements have data-testid attributes for testing
+  - LocationData interface includes: latitude, longitude, name, country, admin1 (state)
+  - Full keyboard support: Enter to search, Escape to close results
+  - Backdrop click handler to close search results dropdown
+- **Notes for next iteration**:
+  - Build and lint pass successfully
+  - Dev server verified with HTTP request - all location picker elements render correctly
+  - Playwright browser installation not supported on ARM architecture (verified via HTTP response)
+  - Ready for PRD-012: Implement hyper-local weather suggestions engine
+
 ---
 
 ## Current State
-- Last completed: PRD-010
-- Next recommended: PRD-011 (Build location picker component for manual location entry)
+- Last completed: PRD-011
+- Next recommended: PRD-012 (Implement hyper-local weather suggestions engine)
 - Blockers: [none]
