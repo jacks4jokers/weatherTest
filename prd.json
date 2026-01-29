@@ -78,7 +78,7 @@
       "Include 5-minute granularity for next 2 hours using minutely data",
       "Implement fallback: if Open-Meteo fails, use NWS data"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "007",

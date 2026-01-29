@@ -95,9 +95,24 @@
   - Build and lint pass successfully
   - Ready for PRD-006: Create unified weather API aggregation layer
 
+### PRD-006: Create unified weather API aggregation layer
+- **Completed**: 2026-01-29
+- **Files changed**:
+  - src/services/weatherApi.ts (created)
+- **Decisions made**:
+  - Open-Meteo is the primary data source, NWS is the fallback
+  - NWS alerts are always fetched in parallel (non-blocking) and included in results
+  - Timeline merging strategy: hourly data for past and >2h future, minutely data for next 2 hours
+  - Duplicate timestamps handled by preferring minutely data over hourly
+  - Helper functions added: getCurrentWeather() and getWeatherAtTime() for convenience
+  - WeatherTimelineResult interface includes: timeline, alerts, and source indicator
+- **Notes for next iteration**:
+  - Build and lint pass successfully
+  - Ready for PRD-007: Implement geolocation hook for user location
+
 ---
 
 ## Current State
-- Last completed: PRD-005
-- Next recommended: PRD-006 (Create unified weather API aggregation layer)
+- Last completed: PRD-006
+- Next recommended: PRD-007 (Implement geolocation hook for user location)
 - Blockers: [none]
