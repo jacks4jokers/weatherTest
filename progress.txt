@@ -243,9 +243,31 @@
   - Fixed pre-existing lint issues in page.tsx and LocationPicker.tsx
   - Ready for PRD-013: Build suggestion banner component
 
+### PRD-013: Build suggestion banner component
+- **Completed**: 2026-01-29
+- **Files changed**:
+  - src/components/SuggestionBanner.tsx (created)
+  - src/app/page.tsx (updated to integrate SuggestionBanner)
+- **Decisions made**:
+  - Uses 'use client' directive since component uses browser state
+  - Consumes timeline data and generates suggestions via generateWeatherSuggestions()
+  - Priority-based coloring: high=red, medium=amber, low=blue (with dark mode variants)
+  - Displays suggestion icon (emoji), message text, and controls
+  - Counter shows "X of Y" when multiple suggestions exist
+  - Previous/Next buttons allow cycling through suggestions
+  - Dismiss button removes current suggestion from view (tracked in dismissedIds Set)
+  - Shows "No weather alerts right now" when no suggestions available
+  - Full ARIA support: role="alert", aria-live="polite", aria-label on buttons
+  - All interactive elements have data-testid attributes for testing
+- **Notes for next iteration**:
+  - Build and lint pass successfully
+  - Dev server verified with HTTP request - all banner elements render correctly
+  - Playwright browser installation not supported on ARM architecture (verified via HTTP response)
+  - Ready for PRD-014: Assemble main page with all components
+
 ---
 
 ## Current State
-- Last completed: PRD-012
-- Next recommended: PRD-013 (Build suggestion banner component)
+- Last completed: PRD-013
+- Next recommended: PRD-014 (Assemble main page with all components)
 - Blockers: [none]

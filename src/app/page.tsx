@@ -4,6 +4,7 @@ import { useState, useMemo, useEffect, useRef } from 'react';
 import { TimelineSlider } from '@/components/TimelineSlider';
 import { WeatherCard } from '@/components/WeatherCard';
 import { LocationPicker, type LocationData } from '@/components/LocationPicker';
+import { SuggestionBanner } from '@/components/SuggestionBanner';
 import { useLocation } from '@/hooks/useLocation';
 import type { TimelinePoint, WeatherCode } from '@/types/weather';
 
@@ -172,6 +173,9 @@ export default function Home() {
             onRequestGps={requestLocation}
           />
         </div>
+
+        {/* Suggestion banner - shows weather alerts and suggestions */}
+        <SuggestionBanner timeline={timeline} />
 
         {/* Weather card - updates based on slider position */}
         {selectedPoint && (

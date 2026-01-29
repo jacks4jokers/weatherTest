@@ -183,7 +183,7 @@
       "Allow dismissing/cycling through multiple suggestions",
       "Style with appropriate weather-related colors/icons"
     ],
-    "passes": false,
+    "passes": true,
     "verification": "playwright"
   },
   {
