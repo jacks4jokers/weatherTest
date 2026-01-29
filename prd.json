@@ -199,7 +199,7 @@
       "Integrate TimelineSlider at bottom",
       "Wire up state so slider controls WeatherCard display"
     ],
-    "passes": false,
+    "passes": true,
     "verification": "playwright"
   },
   {

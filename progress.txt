@@ -265,9 +265,28 @@
   - Playwright browser installation not supported on ARM architecture (verified via HTTP response)
   - Ready for PRD-014: Assemble main page with all components
 
+### PRD-014: Assemble main page with all components
+- **Completed**: 2026-01-29
+- **Files changed**:
+  - src/app/page.tsx (refactored to use real weather data)
+- **Decisions made**:
+  - Replaced mock data with real data from useWeatherData hook
+  - Component layout order: LocationPicker at top, SuggestionBanner below, WeatherCard as main display, TimelineSlider at bottom
+  - Added loading state with spinner while fetching weather data
+  - Added error state with retry button for failed API requests
+  - Added "no location" state prompting user to enable GPS or search
+  - State wiring: selectedPoint is shared between TimelineSlider and WeatherCard, slider changes update card display
+  - Timeline resets when location changes (new data fetch triggers new timeline initialization)
+  - Uses timelinePoints extracted from WeatherTimeline.points for component compatibility
+- **Notes for next iteration**:
+  - Build and lint pass successfully
+  - Dev server verified with HTTP request - all components render correctly
+  - Playwright browser installation not supported on ARM architecture (verified via HTTP response)
+  - Ready for PRD-015: Implement mobile-first responsive design
+
 ---
 
 ## Current State
-- Last completed: PRD-013
-- Next recommended: PRD-014 (Assemble main page with all components)
+- Last completed: PRD-014
+- Next recommended: PRD-015 (Implement mobile-first responsive design)
 - Blockers: [none]

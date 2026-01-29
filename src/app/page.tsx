@@ -1,66 +1,13 @@
 'use client';
 
-import { useState, useMemo, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { TimelineSlider } from '@/components/TimelineSlider';
 import { WeatherCard } from '@/components/WeatherCard';
 import { LocationPicker, type LocationData } from '@/components/LocationPicker';
 import { SuggestionBanner } from '@/components/SuggestionBanner';
 import { useLocation } from '@/hooks/useLocation';
-import type { TimelinePoint, WeatherCode } from '@/types/weather';
-
-/**
- * Generate mock timeline data for testing
- */
-function generateMockTimeline(): TimelinePoint[] {
-  const points: TimelinePoint[] = [];
-  const now = new Date();
-
-  // Round to nearest hour
-  now.setMinutes(0, 0, 0);
-
-  // Generate past 8 hours (hourly)
-  for (let i = -8; i < 0; i++) {
-    const timestamp = new Date(now.getTime() + i * 60 * 60 * 1000);
-    points.push(createMockPoint(timestamp));
-  }
-
-  // Generate next 2 hours (5-minute intervals = 24 points)
-  for (let i = 0; i <= 24; i++) {
-    const timestamp = new Date(now.getTime() + i * 5 * 60 * 1000);
-    points.push(createMockPoint(timestamp));
-  }
-
-  // Generate remaining 46 hours (hourly)
-  for (let i = 3; i <= 48; i++) {
-    const timestamp = new Date(now.getTime() + i * 60 * 60 * 1000);
-    points.push(createMockPoint(timestamp));
-  }
-
-  return points;
-}
-
-function createMockPoint(timestamp: Date): TimelinePoint {
-  const hour = timestamp.getHours();
-  // Vary temperature by time of day
-  const baseTemp = 55 + Math.sin((hour / 24) * Math.PI * 2) * 15;
-
-  return {
-    timestamp: timestamp.toISOString(),
-    weather: {
-      temperature: Math.round(baseTemp + Math.random() * 5),
-      feelsLike: Math.round(baseTemp + Math.random() * 5 - 3),
-      precipitation: Math.round(Math.random() * 100),
-      humidity: Math.round(40 + Math.random() * 40),
-      windSpeed: Math.round(5 + Math.random() * 15),
-      windDirection: 'NW',
-      visibility: 10,
-      uvIndex: hour >= 6 && hour <= 18 ? Math.round(Math.random() * 8) : 0,
-      weatherCode: [0, 1, 2, 3, 61, 80][
-        Math.floor(Math.random() * 6)
-      ] as WeatherCode,
-    },
-  };
-}
+import { useWeatherData } from '@/hooks/useWeatherData';
+import type { TimelinePoint } from '@/types/weather';
 
 /**
  * Format timestamp as a user-friendly label
@@ -120,8 +67,6 @@ function findClosestPoint(timeline: TimelinePoint[], targetTime: number): Timeli
 }
 
 export default function Home() {
-  const timeline = useMemo(() => generateMockTimeline(), []);
-
   // GPS location hook
   const {
     latitude: gpsLatitude,
@@ -150,19 +95,48 @@ export default function Home() {
     }
   }, [gpsLatitude, gpsLongitude]);
 
-  // Initialize selected point to the closest to current time (uses lazy initializer)
-  const [selectedPoint, setSelectedPoint] = useState<TimelinePoint | null>(
-    () => findClosestPoint(timeline, Date.now())
+  // Fetch weather data for the current location
+  const {
+    timeline,
+    loading: weatherLoading,
+    error: weatherError,
+    refetch,
+  } = useWeatherData(
+    currentLocation?.latitude ?? null,
+    currentLocation?.longitude ?? null
   );
 
+  // Selected point on the timeline (controlled by slider)
+  const [selectedPoint, setSelectedPoint] = useState<TimelinePoint | null>(null);
+  const timelineInitialized = useRef(false);
+
+  // Get timeline points array (for convenience)
+  const timelinePoints = timeline?.points ?? [];
+
+  // Initialize selected point when timeline first loads
+  useEffect(() => {
+    if (timelinePoints.length > 0 && !timelineInitialized.current) {
+      timelineInitialized.current = true;
+      queueMicrotask(() => {
+        setSelectedPoint(findClosestPoint(timelinePoints, Date.now()));
+      });
+    }
+  }, [timelinePoints]);
+
+  // Reset timeline initialization when location changes
+  useEffect(() => {
+    timelineInitialized.current = false;
+    setSelectedPoint(null);
+  }, [currentLocation?.latitude, currentLocation?.longitude]);
+
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-zinc-50 p-4 dark:bg-zinc-900">
+    <div className="flex min-h-screen flex-col items-center justify-start bg-zinc-50 p-4 pt-8 dark:bg-zinc-900">
       <main className="w-full max-w-md space-y-6">
         <h1 className="text-center text-2xl font-bold text-zinc-900 dark:text-zinc-100">
           Weather Timeline
         </h1>
 
-        {/* Location picker component */}
+        {/* Location picker at top */}
         <div className="rounded-xl bg-white p-4 shadow-lg dark:bg-zinc-800">
           <LocationPicker
             gpsLocation={{ latitude: gpsLatitude, longitude: gpsLongitude }}
@@ -174,11 +148,52 @@ export default function Home() {
           />
         </div>
 
-        {/* Suggestion banner - shows weather alerts and suggestions */}
-        <SuggestionBanner timeline={timeline} />
+        {/* Suggestion banner below location */}
+        {timelinePoints.length > 0 && (
+          <SuggestionBanner timeline={timelinePoints} />
+        )}
 
-        {/* Weather card - updates based on slider position */}
-        {selectedPoint && (
+        {/* Loading state */}
+        {weatherLoading && (
+          <div className="rounded-xl bg-white p-8 shadow-lg dark:bg-zinc-800">
+            <div className="flex flex-col items-center justify-center space-y-4">
+              <div className="h-8 w-8 animate-spin rounded-full border-4 border-blue-500 border-t-transparent" />
+              <p className="text-zinc-600 dark:text-zinc-400">Loading weather data...</p>
+            </div>
+          </div>
+        )}
+
+        {/* Error state */}
+        {weatherError && !weatherLoading && (
+          <div className="rounded-xl bg-red-50 p-6 shadow-lg dark:bg-red-900/20">
+            <div className="flex flex-col items-center space-y-3">
+              <span className="text-3xl">⚠️</span>
+              <p className="text-center text-red-700 dark:text-red-400">{weatherError}</p>
+              <button
+                onClick={refetch}
+                className="rounded-lg bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-700"
+                data-testid="retry-button"
+              >
+                Try Again
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* No location state */}
+        {!currentLocation && !gpsLoading && !weatherLoading && (
+          <div className="rounded-xl bg-white p-8 shadow-lg dark:bg-zinc-800">
+            <div className="flex flex-col items-center justify-center space-y-4">
+              <span className="text-4xl">📍</span>
+              <p className="text-center text-zinc-600 dark:text-zinc-400">
+                Enable location access or search for a location to see weather data.
+              </p>
+            </div>
+          </div>
+        )}
+
+        {/* Weather card - main display, updates based on slider position */}
+        {selectedPoint && !weatherLoading && !weatherError && (
           <WeatherCard
             weather={selectedPoint.weather}
             timeLabel={formatTimeLabel(selectedPoint.timestamp)}
@@ -186,18 +201,23 @@ export default function Home() {
           />
         )}
 
-        {/* Timeline slider component */}
-        <div className="rounded-xl bg-white p-4 shadow-lg dark:bg-zinc-800">
-          <TimelineSlider
-            timeline={timeline}
-            selectedPoint={selectedPoint}
-            onTimeChange={setSelectedPoint}
-          />
-        </div>
+        {/* Timeline slider at bottom */}
+        {timelinePoints.length > 0 && !weatherLoading && !weatherError && (
+          <div className="rounded-xl bg-white p-4 shadow-lg dark:bg-zinc-800">
+            <TimelineSlider
+              timeline={timelinePoints}
+              selectedPoint={selectedPoint}
+              onTimeChange={setSelectedPoint}
+            />
+          </div>
+        )}
 
-        <p className="text-center text-sm text-zinc-500 dark:text-zinc-400">
-          Drag the slider to see weather at different times
-        </p>
+        {/* Helper text */}
+        {timelinePoints.length > 0 && !weatherLoading && !weatherError && (
+          <p className="text-center text-sm text-zinc-500 dark:text-zinc-400">
+            Drag the slider to see weather at different times
+          </p>
+        )}
       </main>
     </div>
   );
