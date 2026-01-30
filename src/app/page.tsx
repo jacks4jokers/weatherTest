@@ -7,6 +7,7 @@ import { LocationPicker, type LocationData } from '@/components/LocationPicker';
 import { SuggestionBanner } from '@/components/SuggestionBanner';
 import { BottomSheet } from '@/components/BottomSheet';
 import { ThemeToggle } from '@/components/ThemeToggle';
+import { WeatherSkeleton, TimelineSkeleton, SuggestionSkeleton } from '@/components/WeatherSkeleton';
 import { useLocation } from '@/hooks/useLocation';
 import { useWeatherData } from '@/hooks/useWeatherData';
 import type { TimelinePoint } from '@/types/weather';
@@ -102,6 +103,8 @@ export default function Home() {
     timeline,
     loading: weatherLoading,
     error: weatherError,
+    offline,
+    retryCount,
     refetch,
   } = useWeatherData(
     currentLocation?.latitude ?? null,
@@ -155,10 +158,27 @@ export default function Home() {
     }
   }, [timelinePoints, locationKey]);
 
+  // Whether we have data from a previous fetch (show stale data during retry)
+  const hasExistingData = timelinePoints.length > 0;
+
+  // Show skeleton only on initial load (no existing data), not during retries
+  const showSkeleton = weatherLoading && !hasExistingData && currentLocation !== null;
+
   return (
     <div className="flex min-h-screen flex-col items-center justify-start bg-zinc-50 px-2 py-4 pt-6 sm:px-4 sm:pt-8 dark:bg-zinc-900">
+      {/* Offline banner */}
+      {offline && (
+        <div
+          className="fixed top-0 right-0 left-0 z-50 bg-amber-500 px-4 py-2 text-center text-sm font-medium text-white shadow-md"
+          role="alert"
+          data-testid="offline-banner"
+        >
+          You are offline. Weather data may be outdated.
+        </div>
+      )}
+
       {/* Main container with responsive max-width */}
-      <main className="w-full max-w-[320px] space-y-4 sm:max-w-md sm:space-y-6 md:max-w-lg lg:max-w-2xl">
+      <main className={`w-full max-w-[320px] space-y-4 sm:max-w-md sm:space-y-6 md:max-w-lg lg:max-w-2xl ${offline ? 'pt-8' : ''}`}>
         {/* Header with title and theme toggle */}
         <div className="flex items-center justify-between">
           <div className="w-10" /> {/* Spacer for centering */}
@@ -184,34 +204,58 @@ export default function Home() {
               />
             </div>
 
-            {/* Suggestion banner below location */}
-            {timelinePoints.length > 0 && (
+            {/* Suggestion banner or skeleton */}
+            {showSkeleton && <SuggestionSkeleton />}
+            {!showSkeleton && timelinePoints.length > 0 && (
               <SuggestionBanner timeline={timelinePoints} />
             )}
 
-            {/* Loading state */}
-            {weatherLoading && (
-              <div className="rounded-xl bg-white p-6 shadow-lg sm:p-8 dark:bg-zinc-800">
-                <div className="flex flex-col items-center justify-center space-y-4">
-                  <div className="h-8 w-8 animate-spin rounded-full border-4 border-blue-500 border-t-transparent" />
-                  <p className="text-sm text-zinc-600 sm:text-base dark:text-zinc-400">Loading weather data...</p>
-                </div>
+            {/* Loading skeleton */}
+            {showSkeleton && <WeatherSkeleton compact={true} />}
+
+            {/* Retrying indicator (when we have stale data) */}
+            {weatherLoading && hasExistingData && (
+              <div
+                className="flex items-center justify-center gap-2 rounded-lg bg-blue-50 px-3 py-2 text-sm text-blue-700 dark:bg-blue-900/20 dark:text-blue-400"
+                role="status"
+                data-testid="retrying-indicator"
+              >
+                <div className="h-3.5 w-3.5 animate-spin rounded-full border-2 border-blue-500 border-t-transparent" />
+                {retryCount > 0
+                  ? `Retrying... (attempt ${retryCount} of 3)`
+                  : 'Refreshing weather data...'}
               </div>
             )}
 
             {/* Error state */}
             {weatherError && !weatherLoading && (
-              <div className="rounded-xl bg-red-50 p-4 shadow-lg sm:p-6 dark:bg-red-900/20">
+              <div
+                className="rounded-xl bg-red-50 p-4 shadow-lg sm:p-6 dark:bg-red-900/20"
+                role="alert"
+                data-testid="error-state"
+              >
                 <div className="flex flex-col items-center space-y-3">
-                  <span className="text-2xl sm:text-3xl">⚠️</span>
-                  <p className="text-center text-sm text-red-700 sm:text-base dark:text-red-400">{weatherError}</p>
-                  <button
-                    onClick={refetch}
-                    className="rounded-lg bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-700"
-                    data-testid="retry-button"
-                  >
-                    Try Again
-                  </button>
+                  {offline ? (
+                    <span className="text-2xl sm:text-3xl" role="img" aria-label="Offline">
+                      📡
+                    </span>
+                  ) : (
+                    <span className="text-2xl sm:text-3xl" role="img" aria-label="Error">
+                      ⚠️
+                    </span>
+                  )}
+                  <p className="text-center text-sm text-red-700 sm:text-base dark:text-red-400">
+                    {weatherError}
+                  </p>
+                  {!offline && (
+                    <button
+                      onClick={refetch}
+                      className="rounded-lg bg-red-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-red-700 focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:outline-none dark:focus:ring-offset-zinc-900"
+                      data-testid="retry-button"
+                    >
+                      Try Again
+                    </button>
+                  )}
                 </div>
               </div>
             )}
@@ -230,7 +274,7 @@ export default function Home() {
 
             {/* Weather card - main display, updates based on slider position */}
             {/* On mobile: tappable to show bottom sheet with full details */}
-            {selectedPoint && !weatherLoading && !weatherError && (
+            {selectedPoint && !showSkeleton && !weatherError && (
               <div
                 onClick={handleWeatherCardClick}
                 className="cursor-pointer lg:cursor-default"
@@ -255,8 +299,11 @@ export default function Home() {
 
           {/* Right column on desktop: Timeline + details */}
           <div className="mt-4 space-y-4 sm:mt-6 sm:space-y-6 lg:mt-0">
+            {/* Timeline skeleton */}
+            {showSkeleton && <TimelineSkeleton />}
+
             {/* Timeline slider */}
-            {timelinePoints.length > 0 && !weatherLoading && !weatherError && (
+            {!showSkeleton && timelinePoints.length > 0 && !weatherError && (
               <div className="rounded-xl bg-white p-3 shadow-lg sm:p-4 dark:bg-zinc-800">
                 <TimelineSlider
                   timeline={timelinePoints}
@@ -267,14 +314,14 @@ export default function Home() {
             )}
 
             {/* Helper text */}
-            {timelinePoints.length > 0 && !weatherLoading && !weatherError && (
+            {!showSkeleton && timelinePoints.length > 0 && !weatherError && (
               <p className="text-center text-xs text-zinc-500 sm:text-sm dark:text-zinc-400">
                 Drag the slider to see weather at different times
               </p>
             )}
 
             {/* Full weather details on desktop (hidden on mobile) */}
-            {selectedPoint && !weatherLoading && !weatherError && (
+            {selectedPoint && !showSkeleton && !weatherError && (
               <div className="hidden lg:block">
                 <WeatherCard
                   weather={selectedPoint.weather}

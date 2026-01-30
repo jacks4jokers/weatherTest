@@ -271,7 +271,7 @@
       "Implement retry mechanism for failed requests",
       "Handle offline state gracefully"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "020",

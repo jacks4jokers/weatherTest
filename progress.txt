@@ -338,7 +338,35 @@
 
 ---
 
+### PRD-019: Add error handling and loading states
+- **Completed**: 2026-01-30
+- **Files changed**:
+  - src/components/WeatherSkeleton.tsx (created - loading skeleton components)
+  - src/hooks/useWeatherData.ts (updated - retry logic, offline detection, user-friendly errors)
+  - src/app/page.tsx (updated - skeleton integration, offline banner, retry indicator)
+- **Decisions made**:
+  - Loading skeletons mirror actual WeatherCard, TimelineSlider, and SuggestionBanner layouts
+  - WeatherSkeleton supports compact and full modes matching WeatherCard variants
+  - Automatic retry with exponential backoff: 3 retries at 2s, 4s, 8s delays
+  - User-friendly error messages map raw API errors to plain-language descriptions
+  - Error categories handled: offline, network error, rate limit (429), server error (5xx), not found (404), timeout
+  - Offline state detected via navigator.onLine and online/offline window events
+  - Fixed amber banner at top of page when offline, with role="alert" for accessibility
+  - Auto-refetch when browser comes back online after being offline
+  - Stale data preserved during retries (skeleton only shown on initial load with no data)
+  - Retrying indicator shown inline when refreshing with existing data visible
+  - Retry button hidden when offline (since retry would fail anyway)
+  - mountedRef prevents state updates after component unmount
+  - retryTimeoutRef cleared on unmount and coordinate changes to prevent stale retries
+- **Notes for next iteration**:
+  - TypeScript and ESLint pass successfully
+  - Build has pre-existing lightningcss ARM architecture issue (unrelated to code changes)
+  - No Playwright verification required (PRD-019 does not have verification: playwright)
+  - Ready for PRD-017: Create historical accuracy validation script (priority 6)
+
+---
+
 ## Current State
-- Last completed: PRD-016
-- Next recommended: PRD-019 (Add error handling and loading states) - same priority as PRD-016
+- Last completed: PRD-019
+- Next recommended: PRD-017 (Create historical accuracy validation script) - priority 6
 - Blockers: [none]
