@@ -1,0 +1,2551 @@
+{
+  "generatedAt": "2026-01-30T12:23:28.007Z",
+  "dateRange": {
+    "start": "2026-01-28",
+    "end": "2026-01-29"
+  },
+  "overall": {
+    "totalCities": 205,
+    "successfulCities": 189,
+    "failedCities": 16,
+    "avgTemperatureMAE": 2.74,
+    "avgPrecipTimingErrorMinutes": 192,
+    "citiesWithPrecipData": 46,
+    "passesTemperatureThreshold": true,
+    "passesPrecipTimingThreshold": false
+  },
+  "byRegion": [
+    {
+      "region": "Midwest",
+      "cityCount": 37,
+      "avgTemperatureMAE": 2.84,
+      "avgPrecipTimingError": 124,
+      "citiesWithPrecipData": 14,
+      "passesTemperatureThreshold": true,
+      "passesPrecipTimingThreshold": false
+    },
+    {
+      "region": "Northeast",
+      "cityCount": 30,
+      "avgTemperatureMAE": 2.63,
+      "avgPrecipTimingError": 290,
+      "citiesWithPrecipData": 12,
+      "passesTemperatureThreshold": true,
+      "passesPrecipTimingThreshold": false
+    },
+    {
+      "region": "South Central",
+      "cityCount": 23,
+      "avgTemperatureMAE": 2.81,
+      "avgPrecipTimingError": 120,
+      "citiesWithPrecipData": 1,
+      "passesTemperatureThreshold": true,
+      "passesPrecipTimingThreshold": false
+    },
+    {
+      "region": "Southeast",
+      "cityCount": 35,
+      "avgTemperatureMAE": 2.22,
+      "avgPrecipTimingError": 120,
+      "citiesWithPrecipData": 1,
+      "passesTemperatureThreshold": true,
+      "passesPrecipTimingThreshold": false
+    },
+    {
+      "region": "Southwest",
+      "cityCount": 32,
+      "avgTemperatureMAE": 3.4,
+      "avgPrecipTimingError": 120,
+      "citiesWithPrecipData": 1,
+      "passesTemperatureThreshold": false,
+      "passesPrecipTimingThreshold": false
+    },
+    {
+      "region": "West",
+      "cityCount": 32,
+      "avgTemperatureMAE": 2.59,
+      "avgPrecipTimingError": 191,
+      "citiesWithPrecipData": 17,
+      "passesTemperatureThreshold": true,
+      "passesPrecipTimingThreshold": false
+    }
+  ],
+  "cityResults": [
+    {
+      "city": {
+        "name": "New York",
+        "state": "NY",
+        "lat": 40.7128,
+        "lon": -74.006,
+        "region": "Northeast"
+      },
+      "temperatureMAE": 4.62,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 41
+    },
+    {
+      "city": {
+        "name": "Philadelphia",
+        "state": "PA",
+        "lat": 39.9526,
+        "lon": -75.1652,
+        "region": "Northeast"
+      },
+      "temperatureMAE": 2.65,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 41
+    },
+    {
+      "city": {
+        "name": "Boston",
+        "state": "MA",
+        "lat": 42.3601,
+        "lon": -71.0589,
+        "region": "Northeast"
+      },
+      "temperatureMAE": 1.93,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 41
+    },
+    {
+      "city": {
+        "name": "Pittsburgh",
+        "state": "PA",
+        "lat": 40.4406,
+        "lon": -79.9959,
+        "region": "Northeast"
+      },
+      "temperatureMAE": 2.36,
+      "precipitationTimingErrorMinutes": 120,
+      "hoursCompared": 41
+    },
+    {
+      "city": {
+        "name": "Newark",
+        "state": "NJ",
+        "lat": 40.7357,
+        "lon": -74.1724,
+        "region": "Northeast"
+      },
+      "temperatureMAE": 3.22,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 41
+    },
+    {
+      "city": {
+        "name": "Buffalo",
+        "state": "NY",
+        "lat": 42.8864,
+        "lon": -78.8784,
+        "region": "Northeast"
+      },
+      "temperatureMAE": 1.8,
+      "precipitationTimingErrorMinutes": 300,
+      "hoursCompared": 41
+    },
+    {
+      "city": {
+        "name": "Rochester",
+        "state": "NY",
+        "lat": 43.1566,
+        "lon": -77.6088,
+        "region": "Northeast"
+      },
+      "temperatureMAE": 1.13,
+      "precipitationTimingErrorMinutes": 1140,
+      "hoursCompared": 41
+    },
+    {
+      "city": {
+        "name": "Hartford",
+        "state": "CT",
+        "lat": 41.7658,
+        "lon": -72.6734,
+        "region": "Northeast"
+      },
+      "temperatureMAE": 2.86,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 41
+    },
+    {
+      "city": {
+        "name": "Providence",
+        "state": "RI",
+        "lat": 41.824,
+        "lon": -71.4128,
+        "region": "Northeast"
+      },
+      "temperatureMAE": 1.88,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 41
+    },
+    {
+      "city": {
+        "name": "Albany",
+        "state": "NY",
+        "lat": 42.6526,
+        "lon": -73.7562,
+        "region": "Northeast"
+      },
+      "temperatureMAE": 4,
+      "precipitationTimingErrorMinutes": 120,
+      "hoursCompared": 41
+    },
+    {
+      "city": {
+        "name": "Syracuse",
+        "state": "NY",
+        "lat": 43.0481,
+        "lon": -76.1474,
+        "region": "Northeast"
+      },
+      "temperatureMAE": 1.96,
+      "precipitationTimingErrorMinutes": 0,
+      "hoursCompared": 41
+    },
+    {
+      "city": {
+        "name": "Worcester",
+        "state": "MA",
+        "lat": 42.2626,
+        "lon": -71.8023,
+        "region": "Northeast"
+      },
+      "temperatureMAE": 2,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 41
+    },
+    {
+      "city": {
+        "name": "Springfield",
+        "state": "MA",
+        "lat": 42.1015,
+        "lon": -72.5898,
+        "region": "Northeast"
+      },
+      "temperatureMAE": 2.87,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 41
+    },
+    {
+      "city": {
+        "name": "Bridgeport",
+        "state": "CT",
+        "lat": 41.1865,
+        "lon": -73.1952,
+        "region": "Northeast"
+      },
+      "temperatureMAE": 3.37,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 41
+    },
+    {
+      "city": {
+        "name": "New Haven",
+        "state": "CT",
+        "lat": 41.3083,
+        "lon": -72.9279,
+        "region": "Northeast"
+      },
+      "temperatureMAE": 2.39,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 41
+    },
+    {
+      "city": {
+        "name": "Stamford",
+        "state": "CT",
+        "lat": 41.0534,
+        "lon": -73.5387,
+        "region": "Northeast"
+      },
+      "temperatureMAE": 3.1,
+      "precipitationTimingErrorMinutes": 120,
+      "hoursCompared": 41
+    },
+    {
+      "city": {
+        "name": "Portland",
+        "state": "ME",
+        "lat": 43.6591,
+        "lon": -70.2568,
+        "region": "Northeast"
+      },
+      "temperatureMAE": 3.31,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 41
+    },
+    {
+      "city": {
+        "name": "Manchester",
+        "state": "NH",
+        "lat": 42.9956,
+        "lon": -71.4548,
+        "region": "Northeast"
+      },
+      "temperatureMAE": 2.52,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 41
+    },
+    {
+      "city": {
+        "name": "Burlington",
+        "state": "VT",
+        "lat": 44.4759,
+        "lon": -73.2121,
+        "region": "Northeast"
+      },
+      "temperatureMAE": 3.93,
+      "precipitationTimingErrorMinutes": 120,
+      "hoursCompared": 41
+    },
+    {
+      "city": {
+        "name": "Scranton",
+        "state": "PA",
+        "lat": 41.409,
+        "lon": -75.6624,
+        "region": "Northeast"
+      },
+      "temperatureMAE": 2.92,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 41
+    },
+    {
+      "city": {
+        "name": "Allentown",
+        "state": "PA",
+        "lat": 40.6084,
+        "lon": -75.4902,
+        "region": "Northeast"
+      },
+      "temperatureMAE": 2.43,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 41
+    },
+    {
+      "city": {
+        "name": "Erie",
+        "state": "PA",
+        "lat": 42.1292,
+        "lon": -80.0851,
+        "region": "Northeast"
+      },
+      "temperatureMAE": 2.04,
+      "precipitationTimingErrorMinutes": 1080,
+      "hoursCompared": 41
+    },
+    {
+      "city": {
+        "name": "Trenton",
+        "state": "NJ",
+        "lat": 40.2171,
+        "lon": -74.7429,
+        "region": "Northeast"
+      },
+      "temperatureMAE": 2.68,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 41
+    },
+    {
+      "city": {
+        "name": "Camden",
+        "state": "NJ",
+        "lat": 39.9259,
+        "lon": -75.1196,
+        "region": "Northeast"
+      },
+      "temperatureMAE": 2.91,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 41
+    },
+    {
+      "city": {
+        "name": "Bangor",
+        "state": "ME",
+        "lat": 44.8012,
+        "lon": -68.7778,
+        "region": "Northeast"
+      },
+      "temperatureMAE": 1.37,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 41
+    },
+    {
+      "city": {
+        "name": "Concord",
+        "state": "NH",
+        "lat": 43.2081,
+        "lon": -71.5376,
+        "region": "Northeast"
+      },
+      "temperatureMAE": 3.22,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 41
+    },
+    {
+      "city": {
+        "name": "Montpelier",
+        "state": "VT",
+        "lat": 44.2601,
+        "lon": -72.5754,
+        "region": "Northeast"
+      },
+      "temperatureMAE": 1.66,
+      "precipitationTimingErrorMinutes": 120,
+      "hoursCompared": 41
+    },
+    {
+      "city": {
+        "name": "Ithaca",
+        "state": "NY",
+        "lat": 42.444,
+        "lon": -76.5019,
+        "region": "Northeast"
+      },
+      "temperatureMAE": 2.92,
+      "precipitationTimingErrorMinutes": 120,
+      "hoursCompared": 41
+    },
+    {
+      "city": {
+        "name": "Binghamton",
+        "state": "NY",
+        "lat": 42.0987,
+        "lon": -75.918,
+        "region": "Northeast"
+      },
+      "temperatureMAE": 2.45,
+      "precipitationTimingErrorMinutes": 120,
+      "hoursCompared": 41
+    },
+    {
+      "city": {
+        "name": "Utica",
+        "state": "NY",
+        "lat": 43.1009,
+        "lon": -75.2327,
+        "region": "Northeast"
+      },
+      "temperatureMAE": 2.38,
+      "precipitationTimingErrorMinutes": 120,
+      "hoursCompared": 41
+    },
+    {
+      "city": {
+        "name": "Washington",
+        "state": "DC",
+        "lat": 38.9072,
+        "lon": -77.0369,
+        "region": "Southeast"
+      },
+      "temperatureMAE": 4.75,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 41
+    },
+    {
+      "city": {
+        "name": "Charlotte",
+        "state": "NC",
+        "lat": 35.2271,
+        "lon": -80.8431,
+        "region": "Southeast"
+      },
+      "temperatureMAE": 1.4,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 41
+    },
+    {
+      "city": {
+        "name": "Jacksonville",
+        "state": "FL",
+        "lat": 30.3322,
+        "lon": -81.6557,
+        "region": "Southeast"
+      },
+      "temperatureMAE": 2.52,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 41
+    },
+    {
+      "city": {
+        "name": "Nashville",
+        "state": "TN",
+        "lat": 36.1627,
+        "lon": -86.7816,
+        "region": "Southeast"
+      },
+      "temperatureMAE": 1.98,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 42
+    },
+    {
+      "city": {
+        "name": "Memphis",
+        "state": "TN",
+        "lat": 35.1495,
+        "lon": -90.049,
+        "region": "Southeast"
+      },
+      "temperatureMAE": 2.28,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 42
+    },
+    {
+      "city": {
+        "name": "Baltimore",
+        "state": "MD",
+        "lat": 39.2904,
+        "lon": -76.6122,
+        "region": "Southeast"
+      },
+      "temperatureMAE": 3.44,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 41
+    },
+    {
+      "city": {
+        "name": "Louisville",
+        "state": "KY",
+        "lat": 38.2527,
+        "lon": -85.7585,
+        "region": "Southeast"
+      },
+      "temperatureMAE": 2.57,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 41
+    },
+    {
+      "city": {
+        "name": "Richmond",
+        "state": "VA",
+        "lat": 37.5407,
+        "lon": -77.436,
+        "region": "Southeast"
+      },
+      "temperatureMAE": 2.93,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 41
+    },
+    {
+      "city": {
+        "name": "Atlanta",
+        "state": "GA",
+        "lat": 33.749,
+        "lon": -84.388,
+        "region": "Southeast"
+      },
+      "temperatureMAE": 1.59,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 41
+    },
+    {
+      "city": {
+        "name": "Miami",
+        "state": "FL",
+        "lat": 25.7617,
+        "lon": -80.1918,
+        "region": "Southeast"
+      },
+      "temperatureMAE": 0,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 0,
+      "error": "Failed to fetch data"
+    },
+    {
+      "city": {
+        "name": "Tampa",
+        "state": "FL",
+        "lat": 27.9506,
+        "lon": -82.4572,
+        "region": "Southeast"
+      },
+      "temperatureMAE": 3.05,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 41
+    },
+    {
+      "city": {
+        "name": "Orlando",
+        "state": "FL",
+        "lat": 28.5383,
+        "lon": -81.3792,
+        "region": "Southeast"
+      },
+      "temperatureMAE": 2.51,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 41
+    },
+    {
+      "city": {
+        "name": "Raleigh",
+        "state": "NC",
+        "lat": 35.7796,
+        "lon": -78.6382,
+        "region": "Southeast"
+      },
+      "temperatureMAE": 1.69,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 41
+    },
+    {
+      "city": {
+        "name": "Virginia Beach",
+        "state": "VA",
+        "lat": 36.8529,
+        "lon": -75.978,
+        "region": "Southeast"
+      },
+      "temperatureMAE": 1.76,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 41
+    },
+    {
+      "city": {
+        "name": "Norfolk",
+        "state": "VA",
+        "lat": 36.8508,
+        "lon": -76.2859,
+        "region": "Southeast"
+      },
+      "temperatureMAE": 2.2,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 41
+    },
+    {
+      "city": {
+        "name": "Greensboro",
+        "state": "NC",
+        "lat": 36.0726,
+        "lon": -79.792,
+        "region": "Southeast"
+      },
+      "temperatureMAE": 3,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 41
+    },
+    {
+      "city": {
+        "name": "Columbia",
+        "state": "SC",
+        "lat": 34.0007,
+        "lon": -81.0348,
+        "region": "Southeast"
+      },
+      "temperatureMAE": 1.96,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 41
+    },
+    {
+      "city": {
+        "name": "Charleston",
+        "state": "SC",
+        "lat": 32.7765,
+        "lon": -79.9311,
+        "region": "Southeast"
+      },
+      "temperatureMAE": 1.87,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 41
+    },
+    {
+      "city": {
+        "name": "Savannah",
+        "state": "GA",
+        "lat": 32.0809,
+        "lon": -81.0912,
+        "region": "Southeast"
+      },
+      "temperatureMAE": 1.75,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 41
+    },
+    {
+      "city": {
+        "name": "Knoxville",
+        "state": "TN",
+        "lat": 35.9606,
+        "lon": -83.9207,
+        "region": "Southeast"
+      },
+      "temperatureMAE": 0,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 0,
+      "error": "Failed to fetch data"
+    },
+    {
+      "city": {
+        "name": "Chattanooga",
+        "state": "TN",
+        "lat": 35.0456,
+        "lon": -85.3097,
+        "region": "Southeast"
+      },
+      "temperatureMAE": 2.01,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 41
+    },
+    {
+      "city": {
+        "name": "Birmingham",
+        "state": "AL",
+        "lat": 33.5207,
+        "lon": -86.8025,
+        "region": "Southeast"
+      },
+      "temperatureMAE": 3.4,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 42
+    },
+    {
+      "city": {
+        "name": "Montgomery",
+        "state": "AL",
+        "lat": 32.3792,
+        "lon": -86.3077,
+        "region": "Southeast"
+      },
+      "temperatureMAE": 2.86,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 42
+    },
+    {
+      "city": {
+        "name": "Huntsville",
+        "state": "AL",
+        "lat": 34.7304,
+        "lon": -86.5861,
+        "region": "Southeast"
+      },
+      "temperatureMAE": 1.63,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 42
+    },
+    {
+      "city": {
+        "name": "Mobile",
+        "state": "AL",
+        "lat": 30.6954,
+        "lon": -88.0399,
+        "region": "Southeast"
+      },
+      "temperatureMAE": 2.14,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 42
+    },
+    {
+      "city": {
+        "name": "Lexington",
+        "state": "KY",
+        "lat": 38.0406,
+        "lon": -84.5037,
+        "region": "Southeast"
+      },
+      "temperatureMAE": 1.7,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 41
+    },
+    {
+      "city": {
+        "name": "Fort Lauderdale",
+        "state": "FL",
+        "lat": 26.1224,
+        "lon": -80.1373,
+        "region": "Southeast"
+      },
+      "temperatureMAE": 2.57,
+      "precipitationTimingErrorMinutes": 120,
+      "hoursCompared": 41
+    },
+    {
+      "city": {
+        "name": "St. Petersburg",
+        "state": "FL",
+        "lat": 27.7676,
+        "lon": -82.6403,
+        "region": "Southeast"
+      },
+      "temperatureMAE": 0,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 0,
+      "error": "Failed to fetch data"
+    },
+    {
+      "city": {
+        "name": "Tallahassee",
+        "state": "FL",
+        "lat": 30.4383,
+        "lon": -84.2807,
+        "region": "Southeast"
+      },
+      "temperatureMAE": 1.97,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 41
+    },
+    {
+      "city": {
+        "name": "Pensacola",
+        "state": "FL",
+        "lat": 30.4213,
+        "lon": -87.2169,
+        "region": "Southeast"
+      },
+      "temperatureMAE": 2.67,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 42
+    },
+    {
+      "city": {
+        "name": "Wilmington",
+        "state": "NC",
+        "lat": 34.2257,
+        "lon": -77.9447,
+        "region": "Southeast"
+      },
+      "temperatureMAE": 0,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 0,
+      "error": "Failed to fetch data"
+    },
+    {
+      "city": {
+        "name": "Durham",
+        "state": "NC",
+        "lat": 35.994,
+        "lon": -78.8986,
+        "region": "Southeast"
+      },
+      "temperatureMAE": 1.75,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 41
+    },
+    {
+      "city": {
+        "name": "Fayetteville",
+        "state": "NC",
+        "lat": 35.0527,
+        "lon": -78.8784,
+        "region": "Southeast"
+      },
+      "temperatureMAE": 1.84,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 41
+    },
+    {
+      "city": {
+        "name": "Myrtle Beach",
+        "state": "SC",
+        "lat": 33.6891,
+        "lon": -78.8867,
+        "region": "Southeast"
+      },
+      "temperatureMAE": 1.22,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 41
+    },
+    {
+      "city": {
+        "name": "Augusta",
+        "state": "GA",
+        "lat": 33.4735,
+        "lon": -81.9748,
+        "region": "Southeast"
+      },
+      "temperatureMAE": 1.73,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 41
+    },
+    {
+      "city": {
+        "name": "Macon",
+        "state": "GA",
+        "lat": 32.8407,
+        "lon": -83.6324,
+        "region": "Southeast"
+      },
+      "temperatureMAE": 1.58,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 41
+    },
+    {
+      "city": {
+        "name": "Jackson",
+        "state": "MS",
+        "lat": 32.2988,
+        "lon": -90.1848,
+        "region": "Southeast"
+      },
+      "temperatureMAE": 1.71,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 42
+    },
+    {
+      "city": {
+        "name": "Biloxi",
+        "state": "MS",
+        "lat": 30.396,
+        "lon": -88.8853,
+        "region": "Southeast"
+      },
+      "temperatureMAE": 0,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 0,
+      "error": "Failed to fetch data"
+    },
+    {
+      "city": {
+        "name": "Asheville",
+        "state": "NC",
+        "lat": 35.5951,
+        "lon": -82.5515,
+        "region": "Southeast"
+      },
+      "temperatureMAE": 1.35,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 41
+    },
+    {
+      "city": {
+        "name": "Greenville",
+        "state": "SC",
+        "lat": 34.8526,
+        "lon": -82.394,
+        "region": "Southeast"
+      },
+      "temperatureMAE": 2.37,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 41
+    },
+    {
+      "city": {
+        "name": "Chicago",
+        "state": "IL",
+        "lat": 41.8781,
+        "lon": -87.6298,
+        "region": "Midwest"
+      },
+      "temperatureMAE": 1.59,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 42
+    },
+    {
+      "city": {
+        "name": "Columbus",
+        "state": "OH",
+        "lat": 39.9612,
+        "lon": -82.9988,
+        "region": "Midwest"
+      },
+      "temperatureMAE": 3.49,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 41
+    },
+    {
+      "city": {
+        "name": "Indianapolis",
+        "state": "IN",
+        "lat": 39.7684,
+        "lon": -86.1581,
+        "region": "Midwest"
+      },
+      "temperatureMAE": 3.34,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 41
+    },
+    {
+      "city": {
+        "name": "Detroit",
+        "state": "MI",
+        "lat": 42.3314,
+        "lon": -83.0458,
+        "region": "Midwest"
+      },
+      "temperatureMAE": 3.31,
+      "precipitationTimingErrorMinutes": 120,
+      "hoursCompared": 41
+    },
+    {
+      "city": {
+        "name": "Milwaukee",
+        "state": "WI",
+        "lat": 43.0389,
+        "lon": -87.9065,
+        "region": "Midwest"
+      },
+      "temperatureMAE": 4.23,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 42
+    },
+    {
+      "city": {
+        "name": "Kansas City",
+        "state": "MO",
+        "lat": 39.0997,
+        "lon": -94.5786,
+        "region": "Midwest"
+      },
+      "temperatureMAE": 4.04,
+      "precipitationTimingErrorMinutes": 120,
+      "hoursCompared": 42
+    },
+    {
+      "city": {
+        "name": "St. Louis",
+        "state": "MO",
+        "lat": 38.627,
+        "lon": -90.1994,
+        "region": "Midwest"
+      },
+      "temperatureMAE": 3.38,
+      "precipitationTimingErrorMinutes": 120,
+      "hoursCompared": 42
+    },
+    {
+      "city": {
+        "name": "Minneapolis",
+        "state": "MN",
+        "lat": 44.9778,
+        "lon": -93.265,
+        "region": "Midwest"
+      },
+      "temperatureMAE": 4.66,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 42
+    },
+    {
+      "city": {
+        "name": "Cleveland",
+        "state": "OH",
+        "lat": 41.4993,
+        "lon": -81.6944,
+        "region": "Midwest"
+      },
+      "temperatureMAE": 2.74,
+      "precipitationTimingErrorMinutes": 120,
+      "hoursCompared": 41
+    },
+    {
+      "city": {
+        "name": "Cincinnati",
+        "state": "OH",
+        "lat": 39.1031,
+        "lon": -84.512,
+        "region": "Midwest"
+      },
+      "temperatureMAE": 4.65,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 41
+    },
+    {
+      "city": {
+        "name": "Omaha",
+        "state": "NE",
+        "lat": 41.2565,
+        "lon": -95.9345,
+        "region": "Midwest"
+      },
+      "temperatureMAE": 1.24,
+      "precipitationTimingErrorMinutes": 60,
+      "hoursCompared": 42
+    },
+    {
+      "city": {
+        "name": "Madison",
+        "state": "WI",
+        "lat": 43.0731,
+        "lon": -89.4012,
+        "region": "Midwest"
+      },
+      "temperatureMAE": 2.98,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 42
+    },
+    {
+      "city": {
+        "name": "Des Moines",
+        "state": "IA",
+        "lat": 41.5868,
+        "lon": -93.625,
+        "region": "Midwest"
+      },
+      "temperatureMAE": 1.46,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 42
+    },
+    {
+      "city": {
+        "name": "Wichita",
+        "state": "KS",
+        "lat": 37.6872,
+        "lon": -97.3301,
+        "region": "Midwest"
+      },
+      "temperatureMAE": 2.38,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 42
+    },
+    {
+      "city": {
+        "name": "Grand Rapids",
+        "state": "MI",
+        "lat": 42.9634,
+        "lon": -85.6681,
+        "region": "Midwest"
+      },
+      "temperatureMAE": 2.03,
+      "precipitationTimingErrorMinutes": 120,
+      "hoursCompared": 41
+    },
+    {
+      "city": {
+        "name": "Toledo",
+        "state": "OH",
+        "lat": 41.6528,
+        "lon": -83.5379,
+        "region": "Midwest"
+      },
+      "temperatureMAE": 3.62,
+      "precipitationTimingErrorMinutes": 120,
+      "hoursCompared": 41
+    },
+    {
+      "city": {
+        "name": "Akron",
+        "state": "OH",
+        "lat": 41.0814,
+        "lon": -81.519,
+        "region": "Midwest"
+      },
+      "temperatureMAE": 2.21,
+      "precipitationTimingErrorMinutes": 120,
+      "hoursCompared": 41
+    },
+    {
+      "city": {
+        "name": "Dayton",
+        "state": "OH",
+        "lat": 39.7589,
+        "lon": -84.1916,
+        "region": "Midwest"
+      },
+      "temperatureMAE": 0,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 0,
+      "error": "Failed to fetch data"
+    },
+    {
+      "city": {
+        "name": "Fort Wayne",
+        "state": "IN",
+        "lat": 41.0793,
+        "lon": -85.1394,
+        "region": "Midwest"
+      },
+      "temperatureMAE": 2.16,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 41
+    },
+    {
+      "city": {
+        "name": "Lansing",
+        "state": "MI",
+        "lat": 42.7325,
+        "lon": -84.5555,
+        "region": "Midwest"
+      },
+      "temperatureMAE": 2.81,
+      "precipitationTimingErrorMinutes": 120,
+      "hoursCompared": 41
+    },
+    {
+      "city": {
+        "name": "Ann Arbor",
+        "state": "MI",
+        "lat": 42.2808,
+        "lon": -83.743,
+        "region": "Midwest"
+      },
+      "temperatureMAE": 0,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 0,
+      "error": "Failed to fetch data"
+    },
+    {
+      "city": {
+        "name": "Lincoln",
+        "state": "NE",
+        "lat": 40.8136,
+        "lon": -96.7026,
+        "region": "Midwest"
+      },
+      "temperatureMAE": 1.37,
+      "precipitationTimingErrorMinutes": 60,
+      "hoursCompared": 42
+    },
+    {
+      "city": {
+        "name": "Cedar Rapids",
+        "state": "IA",
+        "lat": 41.9779,
+        "lon": -91.6656,
+        "region": "Midwest"
+      },
+      "temperatureMAE": 1.62,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 42
+    },
+    {
+      "city": {
+        "name": "Topeka",
+        "state": "KS",
+        "lat": 39.0489,
+        "lon": -95.678,
+        "region": "Midwest"
+      },
+      "temperatureMAE": 3.22,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 42
+    },
+    {
+      "city": {
+        "name": "Sioux Falls",
+        "state": "SD",
+        "lat": 43.5446,
+        "lon": -96.7311,
+        "region": "Midwest"
+      },
+      "temperatureMAE": 1.98,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 42
+    },
+    {
+      "city": {
+        "name": "Fargo",
+        "state": "ND",
+        "lat": 46.8772,
+        "lon": -96.7898,
+        "region": "Midwest"
+      },
+      "temperatureMAE": 1.59,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 42
+    },
+    {
+      "city": {
+        "name": "Springfield",
+        "state": "IL",
+        "lat": 39.7817,
+        "lon": -89.6502,
+        "region": "Midwest"
+      },
+      "temperatureMAE": 4.28,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 42
+    },
+    {
+      "city": {
+        "name": "Peoria",
+        "state": "IL",
+        "lat": 40.6936,
+        "lon": -89.589,
+        "region": "Midwest"
+      },
+      "temperatureMAE": 2.06,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 42
+    },
+    {
+      "city": {
+        "name": "Rockford",
+        "state": "IL",
+        "lat": 42.2711,
+        "lon": -89.094,
+        "region": "Midwest"
+      },
+      "temperatureMAE": 3.32,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 42
+    },
+    {
+      "city": {
+        "name": "Green Bay",
+        "state": "WI",
+        "lat": 44.5133,
+        "lon": -88.0133,
+        "region": "Midwest"
+      },
+      "temperatureMAE": 3.89,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 42
+    },
+    {
+      "city": {
+        "name": "Duluth",
+        "state": "MN",
+        "lat": 46.7867,
+        "lon": -92.1005,
+        "region": "Midwest"
+      },
+      "temperatureMAE": 2.03,
+      "precipitationTimingErrorMinutes": 120,
+      "hoursCompared": 42
+    },
+    {
+      "city": {
+        "name": "St. Paul",
+        "state": "MN",
+        "lat": 44.9537,
+        "lon": -93.09,
+        "region": "Midwest"
+      },
+      "temperatureMAE": 6.06,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 42
+    },
+    {
+      "city": {
+        "name": "Rochester",
+        "state": "MN",
+        "lat": 44.0121,
+        "lon": -92.4802,
+        "region": "Midwest"
+      },
+      "temperatureMAE": 2.3,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 42
+    },
+    {
+      "city": {
+        "name": "Evansville",
+        "state": "IN",
+        "lat": 37.9716,
+        "lon": -87.5711,
+        "region": "Midwest"
+      },
+      "temperatureMAE": 3.09,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 42
+    },
+    {
+      "city": {
+        "name": "South Bend",
+        "state": "IN",
+        "lat": 41.6764,
+        "lon": -86.252,
+        "region": "Midwest"
+      },
+      "temperatureMAE": 0,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 0,
+      "error": "Failed to fetch data"
+    },
+    {
+      "city": {
+        "name": "Youngstown",
+        "state": "OH",
+        "lat": 41.0998,
+        "lon": -80.6495,
+        "region": "Midwest"
+      },
+      "temperatureMAE": 2.1,
+      "precipitationTimingErrorMinutes": 120,
+      "hoursCompared": 41
+    },
+    {
+      "city": {
+        "name": "Springfield",
+        "state": "MO",
+        "lat": 37.209,
+        "lon": -93.2923,
+        "region": "Midwest"
+      },
+      "temperatureMAE": 2.76,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 42
+    },
+    {
+      "city": {
+        "name": "Columbia",
+        "state": "MO",
+        "lat": 38.9517,
+        "lon": -92.3341,
+        "region": "Midwest"
+      },
+      "temperatureMAE": 4.09,
+      "precipitationTimingErrorMinutes": 120,
+      "hoursCompared": 42
+    },
+    {
+      "city": {
+        "name": "Bismarck",
+        "state": "ND",
+        "lat": 46.8083,
+        "lon": -100.7837,
+        "region": "Midwest"
+      },
+      "temperatureMAE": 1.47,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 42
+    },
+    {
+      "city": {
+        "name": "Rapid City",
+        "state": "SD",
+        "lat": 44.0805,
+        "lon": -103.231,
+        "region": "Midwest"
+      },
+      "temperatureMAE": 1.57,
+      "precipitationTimingErrorMinutes": 300,
+      "hoursCompared": 43
+    },
+    {
+      "city": {
+        "name": "Phoenix",
+        "state": "AZ",
+        "lat": 33.4484,
+        "lon": -112.074,
+        "region": "Southwest"
+      },
+      "temperatureMAE": 1.73,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 43
+    },
+    {
+      "city": {
+        "name": "San Antonio",
+        "state": "TX",
+        "lat": 29.4241,
+        "lon": -98.4936,
+        "region": "Southwest"
+      },
+      "temperatureMAE": 4.33,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 42
+    },
+    {
+      "city": {
+        "name": "Dallas",
+        "state": "TX",
+        "lat": 32.7767,
+        "lon": -96.797,
+        "region": "Southwest"
+      },
+      "temperatureMAE": 2.89,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 42
+    },
+    {
+      "city": {
+        "name": "Austin",
+        "state": "TX",
+        "lat": 30.2672,
+        "lon": -97.7431,
+        "region": "Southwest"
+      },
+      "temperatureMAE": 4.31,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 42
+    },
+    {
+      "city": {
+        "name": "Houston",
+        "state": "TX",
+        "lat": 29.7604,
+        "lon": -95.3698,
+        "region": "Southwest"
+      },
+      "temperatureMAE": 1.56,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 42
+    },
+    {
+      "city": {
+        "name": "Fort Worth",
+        "state": "TX",
+        "lat": 32.7555,
+        "lon": -97.3308,
+        "region": "Southwest"
+      },
+      "temperatureMAE": 3.36,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 42
+    },
+    {
+      "city": {
+        "name": "El Paso",
+        "state": "TX",
+        "lat": 31.7619,
+        "lon": -106.485,
+        "region": "Southwest"
+      },
+      "temperatureMAE": 2.22,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 43
+    },
+    {
+      "city": {
+        "name": "Tucson",
+        "state": "AZ",
+        "lat": 32.2226,
+        "lon": -110.9747,
+        "region": "Southwest"
+      },
+      "temperatureMAE": 2.34,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 43
+    },
+    {
+      "city": {
+        "name": "Albuquerque",
+        "state": "NM",
+        "lat": 35.0844,
+        "lon": -106.6504,
+        "region": "Southwest"
+      },
+      "temperatureMAE": 2.88,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 43
+    },
+    {
+      "city": {
+        "name": "Oklahoma City",
+        "state": "OK",
+        "lat": 35.4676,
+        "lon": -97.5164,
+        "region": "Southwest"
+      },
+      "temperatureMAE": 6.21,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 42
+    },
+    {
+      "city": {
+        "name": "Tulsa",
+        "state": "OK",
+        "lat": 36.154,
+        "lon": -95.9928,
+        "region": "Southwest"
+      },
+      "temperatureMAE": 6.57,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 42
+    },
+    {
+      "city": {
+        "name": "Mesa",
+        "state": "AZ",
+        "lat": 33.4152,
+        "lon": -111.8315,
+        "region": "Southwest"
+      },
+      "temperatureMAE": 4.47,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 43
+    },
+    {
+      "city": {
+        "name": "Las Vegas",
+        "state": "NV",
+        "lat": 36.1699,
+        "lon": -115.1398,
+        "region": "Southwest"
+      },
+      "temperatureMAE": 1.81,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 44
+    },
+    {
+      "city": {
+        "name": "Lubbock",
+        "state": "TX",
+        "lat": 33.5779,
+        "lon": -101.8552,
+        "region": "Southwest"
+      },
+      "temperatureMAE": 3.8,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 42
+    },
+    {
+      "city": {
+        "name": "Corpus Christi",
+        "state": "TX",
+        "lat": 27.8006,
+        "lon": -97.3964,
+        "region": "Southwest"
+      },
+      "temperatureMAE": 2.25,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 42
+    },
+    {
+      "city": {
+        "name": "Laredo",
+        "state": "TX",
+        "lat": 27.5036,
+        "lon": -99.5076,
+        "region": "Southwest"
+      },
+      "temperatureMAE": 2.92,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 42
+    },
+    {
+      "city": {
+        "name": "Amarillo",
+        "state": "TX",
+        "lat": 35.222,
+        "lon": -101.8313,
+        "region": "Southwest"
+      },
+      "temperatureMAE": 3.75,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 42
+    },
+    {
+      "city": {
+        "name": "Santa Fe",
+        "state": "NM",
+        "lat": 35.687,
+        "lon": -105.9378,
+        "region": "Southwest"
+      },
+      "temperatureMAE": 3.29,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 43
+    },
+    {
+      "city": {
+        "name": "Las Cruces",
+        "state": "NM",
+        "lat": 32.3199,
+        "lon": -106.7637,
+        "region": "Southwest"
+      },
+      "temperatureMAE": 2.14,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 43
+    },
+    {
+      "city": {
+        "name": "Scottsdale",
+        "state": "AZ",
+        "lat": 33.4942,
+        "lon": -111.9261,
+        "region": "Southwest"
+      },
+      "temperatureMAE": 0,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 0,
+      "error": "Failed to fetch data"
+    },
+    {
+      "city": {
+        "name": "Chandler",
+        "state": "AZ",
+        "lat": 33.3062,
+        "lon": -111.8413,
+        "region": "Southwest"
+      },
+      "temperatureMAE": 2.54,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 43
+    },
+    {
+      "city": {
+        "name": "Gilbert",
+        "state": "AZ",
+        "lat": 33.3528,
+        "lon": -111.789,
+        "region": "Southwest"
+      },
+      "temperatureMAE": 3.29,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 43
+    },
+    {
+      "city": {
+        "name": "Tempe",
+        "state": "AZ",
+        "lat": 33.4255,
+        "lon": -111.94,
+        "region": "Southwest"
+      },
+      "temperatureMAE": 3.03,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 43
+    },
+    {
+      "city": {
+        "name": "Flagstaff",
+        "state": "AZ",
+        "lat": 35.1983,
+        "lon": -111.6513,
+        "region": "Southwest"
+      },
+      "temperatureMAE": 3.3,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 43
+    },
+    {
+      "city": {
+        "name": "Henderson",
+        "state": "NV",
+        "lat": 36.0395,
+        "lon": -114.9817,
+        "region": "Southwest"
+      },
+      "temperatureMAE": 2.69,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 44
+    },
+    {
+      "city": {
+        "name": "Reno",
+        "state": "NV",
+        "lat": 39.5296,
+        "lon": -119.8138,
+        "region": "Southwest"
+      },
+      "temperatureMAE": 5.12,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 44
+    },
+    {
+      "city": {
+        "name": "Midland",
+        "state": "TX",
+        "lat": 31.9973,
+        "lon": -102.0779,
+        "region": "Southwest"
+      },
+      "temperatureMAE": 3.49,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 42
+    },
+    {
+      "city": {
+        "name": "Odessa",
+        "state": "TX",
+        "lat": 31.8457,
+        "lon": -102.3676,
+        "region": "Southwest"
+      },
+      "temperatureMAE": 2.87,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 42
+    },
+    {
+      "city": {
+        "name": "Waco",
+        "state": "TX",
+        "lat": 31.5493,
+        "lon": -97.1467,
+        "region": "Southwest"
+      },
+      "temperatureMAE": 2.29,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 42
+    },
+    {
+      "city": {
+        "name": "McAllen",
+        "state": "TX",
+        "lat": 26.2034,
+        "lon": -98.23,
+        "region": "Southwest"
+      },
+      "temperatureMAE": 2.39,
+      "precipitationTimingErrorMinutes": 120,
+      "hoursCompared": 42
+    },
+    {
+      "city": {
+        "name": "Brownsville",
+        "state": "TX",
+        "lat": 25.9017,
+        "lon": -97.4975,
+        "region": "Southwest"
+      },
+      "temperatureMAE": 0,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 0,
+      "error": "Failed to fetch data"
+    },
+    {
+      "city": {
+        "name": "Abilene",
+        "state": "TX",
+        "lat": 32.4487,
+        "lon": -99.7331,
+        "region": "Southwest"
+      },
+      "temperatureMAE": 2.8,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 42
+    },
+    {
+      "city": {
+        "name": "Tyler",
+        "state": "TX",
+        "lat": 32.3513,
+        "lon": -95.3011,
+        "region": "Southwest"
+      },
+      "temperatureMAE": 0,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 0,
+      "error": "Failed to fetch data"
+    },
+    {
+      "city": {
+        "name": "Norman",
+        "state": "OK",
+        "lat": 35.2226,
+        "lon": -97.4395,
+        "region": "Southwest"
+      },
+      "temperatureMAE": 5.73,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 42
+    },
+    {
+      "city": {
+        "name": "Broken Arrow",
+        "state": "OK",
+        "lat": 36.0526,
+        "lon": -95.7908,
+        "region": "Southwest"
+      },
+      "temperatureMAE": 6.4,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 42
+    },
+    {
+      "city": {
+        "name": "Los Angeles",
+        "state": "CA",
+        "lat": 34.0522,
+        "lon": -118.2437,
+        "region": "West"
+      },
+      "temperatureMAE": 3.87,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 44
+    },
+    {
+      "city": {
+        "name": "San Francisco",
+        "state": "CA",
+        "lat": 37.7749,
+        "lon": -122.4194,
+        "region": "West"
+      },
+      "temperatureMAE": 1.07,
+      "precipitationTimingErrorMinutes": 120,
+      "hoursCompared": 44
+    },
+    {
+      "city": {
+        "name": "San Diego",
+        "state": "CA",
+        "lat": 32.7157,
+        "lon": -117.1611,
+        "region": "West"
+      },
+      "temperatureMAE": 1.46,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 44
+    },
+    {
+      "city": {
+        "name": "San Jose",
+        "state": "CA",
+        "lat": 37.3382,
+        "lon": -121.8863,
+        "region": "West"
+      },
+      "temperatureMAE": 2.11,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 44
+    },
+    {
+      "city": {
+        "name": "Seattle",
+        "state": "WA",
+        "lat": 47.6062,
+        "lon": -122.3321,
+        "region": "West"
+      },
+      "temperatureMAE": 0.99,
+      "precipitationTimingErrorMinutes": 0,
+      "hoursCompared": 44
+    },
+    {
+      "city": {
+        "name": "Denver",
+        "state": "CO",
+        "lat": 39.7392,
+        "lon": -104.9903,
+        "region": "West"
+      },
+      "temperatureMAE": 4.5,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 43
+    },
+    {
+      "city": {
+        "name": "Portland",
+        "state": "OR",
+        "lat": 45.5051,
+        "lon": -122.675,
+        "region": "West"
+      },
+      "temperatureMAE": 1.02,
+      "precipitationTimingErrorMinutes": 60,
+      "hoursCompared": 44
+    },
+    {
+      "city": {
+        "name": "Sacramento",
+        "state": "CA",
+        "lat": 38.5816,
+        "lon": -121.4944,
+        "region": "West"
+      },
+      "temperatureMAE": 1.24,
+      "precipitationTimingErrorMinutes": 120,
+      "hoursCompared": 44
+    },
+    {
+      "city": {
+        "name": "Fresno",
+        "state": "CA",
+        "lat": 36.7378,
+        "lon": -119.7871,
+        "region": "West"
+      },
+      "temperatureMAE": 2.68,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 44
+    },
+    {
+      "city": {
+        "name": "Salt Lake City",
+        "state": "UT",
+        "lat": 40.7608,
+        "lon": -111.891,
+        "region": "West"
+      },
+      "temperatureMAE": 2.69,
+      "precipitationTimingErrorMinutes": 240,
+      "hoursCompared": 43
+    },
+    {
+      "city": {
+        "name": "Long Beach",
+        "state": "CA",
+        "lat": 33.7701,
+        "lon": -118.1937,
+        "region": "West"
+      },
+      "temperatureMAE": 0,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 0,
+      "error": "Failed to fetch data"
+    },
+    {
+      "city": {
+        "name": "Oakland",
+        "state": "CA",
+        "lat": 37.8044,
+        "lon": -122.2712,
+        "region": "West"
+      },
+      "temperatureMAE": 1.17,
+      "precipitationTimingErrorMinutes": 120,
+      "hoursCompared": 44
+    },
+    {
+      "city": {
+        "name": "Bakersfield",
+        "state": "CA",
+        "lat": 35.3733,
+        "lon": -119.0187,
+        "region": "West"
+      },
+      "temperatureMAE": 2.41,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 44
+    },
+    {
+      "city": {
+        "name": "Riverside",
+        "state": "CA",
+        "lat": 33.9806,
+        "lon": -117.3755,
+        "region": "West"
+      },
+      "temperatureMAE": 1.61,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 44
+    },
+    {
+      "city": {
+        "name": "Stockton",
+        "state": "CA",
+        "lat": 37.9577,
+        "lon": -121.2908,
+        "region": "West"
+      },
+      "temperatureMAE": 1.21,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 44
+    },
+    {
+      "city": {
+        "name": "Boise",
+        "state": "ID",
+        "lat": 43.615,
+        "lon": -116.2023,
+        "region": "West"
+      },
+      "temperatureMAE": 0,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 0,
+      "error": "Failed to fetch data"
+    },
+    {
+      "city": {
+        "name": "Spokane",
+        "state": "WA",
+        "lat": 47.6588,
+        "lon": -117.426,
+        "region": "West"
+      },
+      "temperatureMAE": 1.86,
+      "precipitationTimingErrorMinutes": 120,
+      "hoursCompared": 44
+    },
+    {
+      "city": {
+        "name": "Tacoma",
+        "state": "WA",
+        "lat": 47.2529,
+        "lon": -122.4443,
+        "region": "West"
+      },
+      "temperatureMAE": 1.58,
+      "precipitationTimingErrorMinutes": 420,
+      "hoursCompared": 44
+    },
+    {
+      "city": {
+        "name": "Colorado Springs",
+        "state": "CO",
+        "lat": 38.8339,
+        "lon": -104.8214,
+        "region": "West"
+      },
+      "temperatureMAE": 3.91,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 43
+    },
+    {
+      "city": {
+        "name": "Aurora",
+        "state": "CO",
+        "lat": 39.7294,
+        "lon": -104.8319,
+        "region": "West"
+      },
+      "temperatureMAE": 4.68,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 43
+    },
+    {
+      "city": {
+        "name": "Honolulu",
+        "state": "HI",
+        "lat": 21.3069,
+        "lon": -157.8583,
+        "region": "West"
+      },
+      "temperatureMAE": 2.88,
+      "precipitationTimingErrorMinutes": 120,
+      "hoursCompared": 46
+    },
+    {
+      "city": {
+        "name": "Anchorage",
+        "state": "AK",
+        "lat": 61.2181,
+        "lon": -149.9003,
+        "region": "West"
+      },
+      "temperatureMAE": 3.9,
+      "precipitationTimingErrorMinutes": 720,
+      "hoursCompared": 45
+    },
+    {
+      "city": {
+        "name": "Eugene",
+        "state": "OR",
+        "lat": 44.0521,
+        "lon": -123.0868,
+        "region": "West"
+      },
+      "temperatureMAE": 4.51,
+      "precipitationTimingErrorMinutes": 120,
+      "hoursCompared": 44
+    },
+    {
+      "city": {
+        "name": "Salem",
+        "state": "OR",
+        "lat": 44.9429,
+        "lon": -123.0351,
+        "region": "West"
+      },
+      "temperatureMAE": 3.17,
+      "precipitationTimingErrorMinutes": 540,
+      "hoursCompared": 44
+    },
+    {
+      "city": {
+        "name": "Provo",
+        "state": "UT",
+        "lat": 40.2338,
+        "lon": -111.6585,
+        "region": "West"
+      },
+      "temperatureMAE": 0,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 0,
+      "error": "Failed to fetch data"
+    },
+    {
+      "city": {
+        "name": "Ogden",
+        "state": "UT",
+        "lat": 41.223,
+        "lon": -111.9738,
+        "region": "West"
+      },
+      "temperatureMAE": 5.48,
+      "precipitationTimingErrorMinutes": 180,
+      "hoursCompared": 43
+    },
+    {
+      "city": {
+        "name": "Fort Collins",
+        "state": "CO",
+        "lat": 40.5853,
+        "lon": -105.0844,
+        "region": "West"
+      },
+      "temperatureMAE": 7.02,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 43
+    },
+    {
+      "city": {
+        "name": "Pueblo",
+        "state": "CO",
+        "lat": 38.2544,
+        "lon": -104.6091,
+        "region": "West"
+      },
+      "temperatureMAE": 4.2,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 43
+    },
+    {
+      "city": {
+        "name": "Redding",
+        "state": "CA",
+        "lat": 40.5865,
+        "lon": -122.3917,
+        "region": "West"
+      },
+      "temperatureMAE": 1.07,
+      "precipitationTimingErrorMinutes": 120,
+      "hoursCompared": 44
+    },
+    {
+      "city": {
+        "name": "Modesto",
+        "state": "CA",
+        "lat": 37.6391,
+        "lon": -120.9969,
+        "region": "West"
+      },
+      "temperatureMAE": 1.69,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 44
+    },
+    {
+      "city": {
+        "name": "Santa Rosa",
+        "state": "CA",
+        "lat": 38.4404,
+        "lon": -122.7141,
+        "region": "West"
+      },
+      "temperatureMAE": 1.75,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 44
+    },
+    {
+      "city": {
+        "name": "Medford",
+        "state": "OR",
+        "lat": 42.3265,
+        "lon": -122.8756,
+        "region": "West"
+      },
+      "temperatureMAE": 1.6,
+      "precipitationTimingErrorMinutes": 120,
+      "hoursCompared": 44
+    },
+    {
+      "city": {
+        "name": "Bellingham",
+        "state": "WA",
+        "lat": 48.7519,
+        "lon": -122.4787,
+        "region": "West"
+      },
+      "temperatureMAE": 1.04,
+      "precipitationTimingErrorMinutes": 0,
+      "hoursCompared": 44
+    },
+    {
+      "city": {
+        "name": "Missoula",
+        "state": "MT",
+        "lat": 46.8721,
+        "lon": -114.0001,
+        "region": "West"
+      },
+      "temperatureMAE": 1.72,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 43
+    },
+    {
+      "city": {
+        "name": "Billings",
+        "state": "MT",
+        "lat": 45.7833,
+        "lon": -108.5007,
+        "region": "West"
+      },
+      "temperatureMAE": 2.65,
+      "precipitationTimingErrorMinutes": 120,
+      "hoursCompared": 43
+    },
+    {
+      "city": {
+        "name": "New Orleans",
+        "state": "LA",
+        "lat": 29.9511,
+        "lon": -90.0715,
+        "region": "South Central"
+      },
+      "temperatureMAE": 3.9,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 42
+    },
+    {
+      "city": {
+        "name": "Baton Rouge",
+        "state": "LA",
+        "lat": 30.4515,
+        "lon": -91.1871,
+        "region": "South Central"
+      },
+      "temperatureMAE": 1.68,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 42
+    },
+    {
+      "city": {
+        "name": "Shreveport",
+        "state": "LA",
+        "lat": 32.5252,
+        "lon": -93.7502,
+        "region": "South Central"
+      },
+      "temperatureMAE": 1.93,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 42
+    },
+    {
+      "city": {
+        "name": "Little Rock",
+        "state": "AR",
+        "lat": 34.7465,
+        "lon": -92.2896,
+        "region": "South Central"
+      },
+      "temperatureMAE": 2.96,
+      "precipitationTimingErrorMinutes": 120,
+      "hoursCompared": 42
+    },
+    {
+      "city": {
+        "name": "Fayetteville",
+        "state": "AR",
+        "lat": 36.0822,
+        "lon": -94.1719,
+        "region": "South Central"
+      },
+      "temperatureMAE": 5.26,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 42
+    },
+    {
+      "city": {
+        "name": "Fort Smith",
+        "state": "AR",
+        "lat": 35.3859,
+        "lon": -94.3985,
+        "region": "South Central"
+      },
+      "temperatureMAE": 6.99,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 42
+    },
+    {
+      "city": {
+        "name": "Lafayette",
+        "state": "LA",
+        "lat": 30.2241,
+        "lon": -92.0198,
+        "region": "South Central"
+      },
+      "temperatureMAE": 2.01,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 42
+    },
+    {
+      "city": {
+        "name": "Lake Charles",
+        "state": "LA",
+        "lat": 30.2266,
+        "lon": -93.2174,
+        "region": "South Central"
+      },
+      "temperatureMAE": 2.52,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 42
+    },
+    {
+      "city": {
+        "name": "Monroe",
+        "state": "LA",
+        "lat": 32.5093,
+        "lon": -92.1193,
+        "region": "South Central"
+      },
+      "temperatureMAE": 2.02,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 42
+    },
+    {
+      "city": {
+        "name": "Alexandria",
+        "state": "LA",
+        "lat": 31.3113,
+        "lon": -92.4451,
+        "region": "South Central"
+      },
+      "temperatureMAE": 0,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 0,
+      "error": "Failed to fetch data"
+    },
+    {
+      "city": {
+        "name": "Jonesboro",
+        "state": "AR",
+        "lat": 35.8423,
+        "lon": -90.7043,
+        "region": "South Central"
+      },
+      "temperatureMAE": 2.69,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 42
+    },
+    {
+      "city": {
+        "name": "Pine Bluff",
+        "state": "AR",
+        "lat": 34.2284,
+        "lon": -92.0032,
+        "region": "South Central"
+      },
+      "temperatureMAE": 2.8,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 42
+    },
+    {
+      "city": {
+        "name": "Hot Springs",
+        "state": "AR",
+        "lat": 34.5037,
+        "lon": -93.0552,
+        "region": "South Central"
+      },
+      "temperatureMAE": 2.29,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 42
+    },
+    {
+      "city": {
+        "name": "Texarkana",
+        "state": "AR",
+        "lat": 33.4418,
+        "lon": -94.0377,
+        "region": "South Central"
+      },
+      "temperatureMAE": 1.82,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 42
+    },
+    {
+      "city": {
+        "name": "Houma",
+        "state": "LA",
+        "lat": 29.5958,
+        "lon": -90.7195,
+        "region": "South Central"
+      },
+      "temperatureMAE": 1.23,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 42
+    },
+    {
+      "city": {
+        "name": "Beaumont",
+        "state": "TX",
+        "lat": 30.0802,
+        "lon": -94.1266,
+        "region": "South Central"
+      },
+      "temperatureMAE": 2.61,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 42
+    },
+    {
+      "city": {
+        "name": "Port Arthur",
+        "state": "TX",
+        "lat": 29.885,
+        "lon": -93.94,
+        "region": "South Central"
+      },
+      "temperatureMAE": 1.64,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 42
+    },
+    {
+      "city": {
+        "name": "Hattiesburg",
+        "state": "MS",
+        "lat": 31.3271,
+        "lon": -89.2903,
+        "region": "South Central"
+      },
+      "temperatureMAE": 0,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 0,
+      "error": "Failed to fetch data"
+    },
+    {
+      "city": {
+        "name": "Meridian",
+        "state": "MS",
+        "lat": 32.3643,
+        "lon": -88.7037,
+        "region": "South Central"
+      },
+      "temperatureMAE": 2.9,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 42
+    },
+    {
+      "city": {
+        "name": "Tupelo",
+        "state": "MS",
+        "lat": 34.2576,
+        "lon": -88.7034,
+        "region": "South Central"
+      },
+      "temperatureMAE": 2.43,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 42
+    },
+    {
+      "city": {
+        "name": "Ruston",
+        "state": "LA",
+        "lat": 32.5232,
+        "lon": -92.6379,
+        "region": "South Central"
+      },
+      "temperatureMAE": 3.35,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 42
+    },
+    {
+      "city": {
+        "name": "Conway",
+        "state": "AR",
+        "lat": 35.0887,
+        "lon": -92.4421,
+        "region": "South Central"
+      },
+      "temperatureMAE": 4.41,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 42
+    },
+    {
+      "city": {
+        "name": "Natchez",
+        "state": "MS",
+        "lat": 31.5604,
+        "lon": -91.4032,
+        "region": "South Central"
+      },
+      "temperatureMAE": 2.82,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 42
+    },
+    {
+      "city": {
+        "name": "Vicksburg",
+        "state": "MS",
+        "lat": 32.3526,
+        "lon": -90.8779,
+        "region": "South Central"
+      },
+      "temperatureMAE": 2.51,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 42
+    },
+    {
+      "city": {
+        "name": "Texarkana",
+        "state": "TX",
+        "lat": 33.4254,
+        "lon": -94.0477,
+        "region": "South Central"
+      },
+      "temperatureMAE": 1.78,
+      "precipitationTimingErrorMinutes": null,
+      "hoursCompared": 42
+    }
+  ]
+}

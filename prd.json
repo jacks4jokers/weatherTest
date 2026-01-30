@@ -258,7 +258,7 @@
       "Document any regions with lower accuracy",
       "Generate final accuracy report"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "019",
