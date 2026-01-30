@@ -69,6 +69,25 @@ function getWeatherIcon(code: WeatherCode): string {
 }
 
 /**
+ * Maps WMO weather codes to CSS animation classes
+ */
+function getWeatherAnimation(code: WeatherCode): string {
+  // Clear / sunny - slow spin
+  if (code === 0) return 'animate-weather-spin-slow';
+  // Partly cloudy - gentle sway
+  if (code >= 1 && code <= 3) return 'animate-weather-sway';
+  // Fog - slow fade pulse
+  if (code === 45 || code === 48) return 'animate-weather-fade-pulse';
+  // Rain / drizzle / freezing rain - bounce (falling motion)
+  if ((code >= 51 && code <= 67) || (code >= 80 && code <= 82)) return 'animate-weather-bounce';
+  // Snow - gentle pulse
+  if ((code >= 71 && code <= 77) || (code >= 85 && code <= 86)) return 'animate-weather-pulse';
+  // Thunderstorm - pulse (flashing)
+  if (code >= 95) return 'animate-weather-pulse';
+  return '';
+}
+
+/**
  * Get precipitation type based on weather code
  */
 function getPrecipitationType(code: WeatherCode): string {
@@ -97,6 +116,7 @@ function getUVLevel(uvIndex: number): { label: string; color: string } {
 /**
  * Weather card component showing current conditions
  * PRD-010: Build weather card component showing current conditions
+ * PRD-020: Added weather icon animations and smooth transitions
  */
 export function WeatherCard({
   weather,
@@ -106,12 +126,13 @@ export function WeatherCard({
 }: WeatherCardProps) {
   const uvLevel = getUVLevel(weather.uvIndex);
   const precipType = getPrecipitationType(weather.weatherCode);
+  const animationClass = getWeatherAnimation(weather.weatherCode);
 
   // Compact mode for mobile - shows only temperature, condition, and key stats
   if (compact) {
     return (
       <div
-        className="w-full rounded-xl bg-white p-4 shadow-lg sm:p-5 dark:bg-zinc-800"
+        className="w-full rounded-xl bg-white p-4 shadow-lg transition-shadow duration-300 sm:p-5 dark:bg-zinc-800"
         data-testid="weather-card-compact"
       >
         {/* Header with time label and condition */}
@@ -127,7 +148,7 @@ export function WeatherCard({
             </p>
           </div>
           <div
-            className="ml-2 flex-shrink-0 text-4xl sm:text-5xl"
+            className={`ml-2 flex-shrink-0 text-4xl sm:text-5xl ${animationClass}`}
             role="img"
             aria-label={getWeatherDescription(weather.weatherCode)}
             data-testid="weather-icon"
@@ -139,7 +160,7 @@ export function WeatherCard({
         {/* Temperature display - more compact */}
         <div className="mb-3" data-testid="temperature-display">
           <div className="flex items-baseline gap-1 sm:gap-2">
-            <span className="text-5xl font-light text-zinc-900 sm:text-6xl dark:text-zinc-100">
+            <span className="text-5xl font-light tabular-nums text-zinc-900 sm:text-6xl dark:text-zinc-100">
               {Math.round(weather.temperature)}
             </span>
             <span className="text-2xl text-zinc-400 sm:text-3xl">°F</span>
@@ -153,15 +174,15 @@ export function WeatherCard({
         <div className="flex flex-wrap items-center gap-3 text-xs text-zinc-600 sm:gap-4 sm:text-sm dark:text-zinc-400">
           <span className="flex items-center gap-1">
             <span>💧</span>
-            <span>{weather.precipitation}%</span>
+            <span className="tabular-nums">{weather.precipitation}%</span>
           </span>
           <span className="flex items-center gap-1">
             <span>🌬️</span>
-            <span>{Math.round(weather.windSpeed)} mph</span>
+            <span className="tabular-nums">{Math.round(weather.windSpeed)} mph</span>
           </span>
           <span className="flex items-center gap-1">
             <span>💨</span>
-            <span>{weather.humidity}%</span>
+            <span className="tabular-nums">{weather.humidity}%</span>
           </span>
         </div>
       </div>
@@ -171,7 +192,7 @@ export function WeatherCard({
   // Full mode - all details
   return (
     <div
-      className="w-full rounded-xl bg-white p-4 shadow-lg sm:p-6 dark:bg-zinc-800"
+      className="w-full rounded-xl bg-white p-4 shadow-lg transition-shadow duration-300 sm:p-6 dark:bg-zinc-800"
       data-testid="weather-card"
     >
       {/* Header with time label and condition */}
@@ -187,7 +208,7 @@ export function WeatherCard({
           </p>
         </div>
         <div
-          className="ml-2 flex-shrink-0 text-4xl sm:text-5xl"
+          className={`ml-2 flex-shrink-0 text-4xl sm:text-5xl ${animationClass}`}
           role="img"
           aria-label={getWeatherDescription(weather.weatherCode)}
           data-testid="weather-icon"
@@ -199,7 +220,7 @@ export function WeatherCard({
       {/* Temperature display */}
       <div className="mb-4 sm:mb-6" data-testid="temperature-display">
         <div className="flex items-baseline gap-1 sm:gap-2">
-          <span className="text-5xl font-light text-zinc-900 sm:text-6xl dark:text-zinc-100">
+          <span className="text-5xl font-light tabular-nums text-zinc-900 sm:text-6xl dark:text-zinc-100">
             {Math.round(weather.temperature)}
           </span>
           <span className="text-2xl text-zinc-400 sm:text-3xl">°F</span>
@@ -222,7 +243,7 @@ export function WeatherCard({
               Precipitation
             </span>
           </div>
-          <p className="mt-0.5 text-lg font-semibold text-zinc-900 sm:mt-1 sm:text-xl dark:text-zinc-100">
+          <p className="mt-0.5 text-lg font-semibold tabular-nums text-zinc-900 sm:mt-1 sm:text-xl dark:text-zinc-100">
             {weather.precipitation}%
           </p>
           <p className="text-[10px] text-zinc-500 sm:text-xs dark:text-zinc-400">
@@ -241,7 +262,7 @@ export function WeatherCard({
               Humidity
             </span>
           </div>
-          <p className="mt-0.5 text-lg font-semibold text-zinc-900 sm:mt-1 sm:text-xl dark:text-zinc-100">
+          <p className="mt-0.5 text-lg font-semibold tabular-nums text-zinc-900 sm:mt-1 sm:text-xl dark:text-zinc-100">
             {weather.humidity}%
           </p>
         </div>
@@ -257,7 +278,7 @@ export function WeatherCard({
               Wind
             </span>
           </div>
-          <p className="mt-0.5 text-lg font-semibold text-zinc-900 sm:mt-1 sm:text-xl dark:text-zinc-100">
+          <p className="mt-0.5 text-lg font-semibold tabular-nums text-zinc-900 sm:mt-1 sm:text-xl dark:text-zinc-100">
             {Math.round(weather.windSpeed)} mph
           </p>
           <p className="text-[10px] text-zinc-500 sm:text-xs dark:text-zinc-400">
@@ -276,7 +297,7 @@ export function WeatherCard({
               Visibility
             </span>
           </div>
-          <p className="mt-0.5 text-lg font-semibold text-zinc-900 sm:mt-1 sm:text-xl dark:text-zinc-100">
+          <p className="mt-0.5 text-lg font-semibold tabular-nums text-zinc-900 sm:mt-1 sm:text-xl dark:text-zinc-100">
             {weather.visibility} mi
           </p>
         </div>
@@ -293,7 +314,7 @@ export function WeatherCard({
             </span>
           </div>
           <div className="mt-0.5 flex items-baseline gap-1 sm:mt-1 sm:gap-2">
-            <span className="text-lg font-semibold text-zinc-900 sm:text-xl dark:text-zinc-100">
+            <span className="text-lg font-semibold tabular-nums text-zinc-900 sm:text-xl dark:text-zinc-100">
               {weather.uvIndex}
             </span>
             <span className={`text-xs font-medium sm:text-sm ${uvLevel.color}`}>
@@ -303,7 +324,7 @@ export function WeatherCard({
           {/* UV Index bar */}
           <div className="mt-1.5 h-1.5 w-full overflow-hidden rounded-full bg-gradient-to-r from-green-400 via-yellow-400 via-orange-400 to-purple-600 sm:mt-2 sm:h-2">
             <div
-              className="h-full bg-zinc-900/20 dark:bg-white/20"
+              className="h-full transition-[margin-left] duration-300 ease-out bg-zinc-900/20 dark:bg-white/20"
               style={{
                 marginLeft: `${Math.min(weather.uvIndex / 11, 1) * 100}%`,
               }}

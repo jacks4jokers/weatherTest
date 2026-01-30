@@ -284,6 +284,6 @@
       "Add smooth transitions when scrubbing timeline",
       "Ensure animations don't impact performance on mobile"
     ],
-    "passes": false
+    "passes": true
   }
 ]

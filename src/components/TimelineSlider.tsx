@@ -1,7 +1,7 @@
 'use client';
 
 import { useCallback, useRef, useState, useEffect, useMemo } from 'react';
-import type { TimelinePoint } from '@/types/weather';
+import type { TimelinePoint, WeatherCode } from '@/types/weather';
 
 export interface TimelineSliderProps {
   /** The weather timeline points to display */
@@ -47,8 +47,41 @@ function formatRelativeTime(timestamp: string): string {
 }
 
 /**
+ * Returns precipitation intensity (0-1) and color for a timeline point.
+ * Used to render the precipitation overlay on the timeline track.
+ */
+function getPrecipitationInfo(code: WeatherCode, precipPct: number): { intensity: number; color: string } | null {
+  // No precipitation
+  if (precipPct <= 5) return null;
+
+  const opacity = Math.min(precipPct / 100, 1);
+
+  // Snow
+  if ((code >= 71 && code <= 77) || (code >= 85 && code <= 86)) {
+    const intensity = code >= 75 ? 1 : code >= 73 ? 0.7 : 0.4;
+    return { intensity: intensity * opacity, color: 'rgb(147, 197, 253)' }; // blue-300
+  }
+  // Thunderstorm
+  if (code >= 95) {
+    return { intensity: 0.9 * opacity, color: 'rgb(252, 211, 77)' }; // amber-300
+  }
+  // Rain / drizzle / freezing rain / showers
+  if ((code >= 51 && code <= 67) || (code >= 80 && code <= 82)) {
+    const intensity = code % 3 === 2 || code === 65 || code === 67 || code === 82 ? 1
+      : code % 3 === 0 || code === 63 || code === 81 ? 0.7 : 0.4;
+    return { intensity: intensity * opacity, color: 'rgb(96, 165, 250)' }; // blue-400
+  }
+  // Generic precipitation probability without precipitation code
+  if (precipPct > 20) {
+    return { intensity: opacity * 0.5, color: 'rgb(147, 197, 253)' };
+  }
+  return null;
+}
+
+/**
  * Timeline slider component for scrubbing through weather data
  * PRD-009: Build timeline slider component with past/future visualization
+ * PRD-020: Added precipitation intensity visualization and smooth transitions
  */
 export function TimelineSlider({
   timeline,
@@ -224,6 +257,46 @@ export function TimelineSlider({
     return idx === -1 ? timeline.length : idx;
   }, [timeline, currentTimeIndex]);
 
+  // Compute precipitation intensity bars for the timeline overlay
+  const precipitationBars = useMemo(() => {
+    const bars: Array<{ index: number; intensity: number; color: string }> = [];
+    // Sample every few points to avoid too many DOM elements
+    const step = Math.max(1, Math.floor(timeline.length / 120));
+    for (let i = 0; i < timeline.length; i += step) {
+      const point = timeline[i];
+      const info = getPrecipitationInfo(
+        point.weather.weatherCode,
+        point.weather.precipitation
+      );
+      if (info && info.intensity > 0.1) {
+        bars.push({ index: i, ...info });
+      }
+    }
+    return bars;
+  }, [timeline]);
+
+  // Track width for precipitation bar sizing
+  const [trackWidth, setTrackWidth] = useState(300);
+  useEffect(() => {
+    const el = trackRef.current;
+    if (!el) return;
+    setTrackWidth(el.clientWidth);
+    const observer = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        setTrackWidth(entry.contentRect.width);
+      }
+    });
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  // Width of each precipitation bar segment in pixels
+  const segmentWidth = useMemo(() => {
+    if (timeline.length <= 1) return 3;
+    const step = Math.max(1, Math.floor(timeline.length / 120));
+    return Math.max(2, Math.min(6, (trackWidth / timeline.length) * step));
+  }, [timeline.length, trackWidth]);
+
   if (timeline.length === 0) {
     return (
       <div className="w-full px-4 py-6">
@@ -242,10 +315,10 @@ export function TimelineSlider({
     >
       {/* Selected time display */}
       <div className="mb-3 text-center sm:mb-4">
-        <div className="text-base font-semibold text-zinc-900 sm:text-lg dark:text-zinc-100">
+        <div className="text-base font-semibold tabular-nums text-zinc-900 sm:text-lg dark:text-zinc-100">
           {selectedPoint ? formatTime(selectedPoint.timestamp) : '—'}
         </div>
-        <div className="text-xs text-zinc-500 sm:text-sm dark:text-zinc-400">
+        <div className="text-xs tabular-nums text-zinc-500 sm:text-sm dark:text-zinc-400">
           {selectedPoint ? formatRelativeTime(selectedPoint.timestamp) : '—'}
         </div>
       </div>
@@ -295,6 +368,29 @@ export function TimelineSlider({
           )}
         </div>
 
+        {/* Precipitation intensity bars - rendered above the track */}
+        <div
+          className="absolute left-0 right-0 flex items-end"
+          style={{ bottom: '50%', marginBottom: '5px', height: '16px' }}
+          aria-hidden="true"
+          data-testid="precipitation-overlay"
+        >
+          {precipitationBars.map((bar) => (
+            <div
+              key={bar.index}
+              className="absolute rounded-t-sm"
+              style={{
+                left: `${getPositionFromIndex(bar.index)}%`,
+                width: `${Math.max(segmentWidth, 2)}px`,
+                height: `${bar.intensity * 16}px`,
+                backgroundColor: bar.color,
+                opacity: 0.7,
+                transform: 'translateX(-50%)',
+              }}
+            />
+          ))}
+        </div>
+
         {/* Tick marks */}
         {tickMarks.map((tick) => (
           <div
@@ -329,12 +425,17 @@ export function TimelineSlider({
           </div>
         ))}
 
-        {/* Thumb / handle */}
+        {/* Thumb / handle - smooth position transition when clicking, instant during drag */}
         <div
           className={`absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-6 h-6 rounded-full border-2 border-white dark:border-zinc-800 shadow-lg transition-transform ${
             isDragging ? 'scale-125 bg-blue-600' : 'bg-blue-500'
           }`}
-          style={{ left: `${getPositionFromIndex(selectedIndex)}%` }}
+          style={{
+            left: `${getPositionFromIndex(selectedIndex)}%`,
+            transition: isDragging
+              ? 'transform 150ms ease-out'
+              : 'left 200ms ease-out, transform 150ms ease-out',
+          }}
           data-testid="timeline-thumb"
         />
       </div>

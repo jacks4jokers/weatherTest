@@ -418,9 +418,41 @@
   - Full report saved at scripts/accuracy-report.json
   - Ready for PRD-020: Add weather condition animations and visual polish (priority 6)
 
+### PRD-020: Add weather condition animations and visual polish
+- **Completed**: 2026-01-30
+- **Files changed**:
+  - src/app/globals.css (updated - added weather animation keyframes and classes)
+  - src/components/WeatherCard.tsx (updated - animated icons, smooth transitions, tabular-nums)
+  - src/components/TimelineSlider.tsx (updated - precipitation overlay, smooth thumb, tabular-nums)
+- **Decisions made**:
+  - Five animation types mapped to weather conditions via CSS keyframes:
+    - spin-slow (12s): clear sky / sunny
+    - sway (3s): partly cloudy, mainly clear, overcast
+    - fade-pulse (2.5s): fog conditions
+    - bounce (2s): rain, drizzle, freezing rain, showers
+    - pulse (3s): snow, thunderstorms
+  - All animations use only GPU-accelerated properties (transform, opacity) with will-change hints
+  - prefers-reduced-motion media query disables all animations for accessibility
+  - Precipitation intensity visualization on timeline track:
+    - Bars rendered above the track showing precipitation probability and intensity
+    - Color-coded: blue-400 for rain/drizzle, blue-300 for snow, amber-300 for thunderstorms
+    - Intensity derived from WMO weather code severity and precipitation percentage
+    - Sampled at every Nth point (max 120 bars) to limit DOM elements
+  - Smooth transitions when scrubbing timeline:
+    - Thumb uses CSS transition on left position (200ms ease-out) when clicking
+    - Transition disabled during drag for instant responsiveness
+    - tabular-nums applied to numeric displays to prevent layout shift during scrubbing
+    - UV index bar marker has transition-[margin-left] for smooth position updates
+  - Track width measured via ResizeObserver (not ref access during render) to satisfy react-hooks/refs lint rule
+  - Card container has transition-shadow for polish on hover/focus
+- **Notes for next iteration**:
+  - TypeScript and ESLint pass successfully
+  - No Playwright verification required (PRD-020 does not have verification: playwright)
+  - All 20 PRD items now pass - sprint is COMPLETE
+
 ---
 
 ## Current State
-- Last completed: PRD-018
-- Next recommended: PRD-020 (Add weather condition animations and visual polish) - priority 6
+- Last completed: PRD-020
+- All PRD items: COMPLETE (20/20 pass)
 - Blockers: [none]
