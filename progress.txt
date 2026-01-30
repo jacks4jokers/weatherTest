@@ -364,9 +364,29 @@
   - No Playwright verification required (PRD-019 does not have verification: playwright)
   - Ready for PRD-017: Create historical accuracy validation script (priority 6)
 
+### PRD-017: Create historical accuracy validation script
+- **Completed**: 2026-01-30
+- **Files changed**:
+  - scripts/validateAccuracy.ts (created)
+- **Decisions made**:
+  - 205 US cities defined across 6 regions: Northeast, Southeast, Midwest, Southwest, West, South Central
+  - Uses Open-Meteo Historical Archive API (archive-api.open-meteo.com) for actual observed data
+  - Compares forecast past-hours data against historical archive data for overlapping time periods
+  - Temperature MAE calculated in Fahrenheit (converts from Celsius for comparison)
+  - Precipitation timing accuracy measures difference between first forecast and actual precipitation events
+  - Missed precipitation events count as 120-minute (2-hour) error
+  - Batch processing of 10 cities at a time with 500ms delay for rate limiting
+  - Generates JSON report file at scripts/accuracy-report.json
+  - Reports include overall metrics, per-region breakdown, per-city results, and worst-performing cities
+  - Run with: npx tsx scripts/validateAccuracy.ts
+- **Notes for next iteration**:
+  - TypeScript and ESLint pass successfully
+  - No Playwright verification required (PRD-017 does not have verification: playwright)
+  - Ready for PRD-018: Run validation and verify accuracy thresholds (priority 6)
+
 ---
 
 ## Current State
-- Last completed: PRD-019
-- Next recommended: PRD-017 (Create historical accuracy validation script) - priority 6
+- Last completed: PRD-017
+- Next recommended: PRD-018 (Run validation and verify accuracy thresholds) - priority 6
 - Blockers: [none]
